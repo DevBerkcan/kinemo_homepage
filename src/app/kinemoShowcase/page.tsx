@@ -1,25 +1,16 @@
 "use client"
 
 import Image from "next/image"
-import dynamic from "next/dynamic"
+import ReactCompareImage from "react-compare-image"
 import { useState } from "react"
 import { motion } from "framer-motion"
-
-
-
-const ReactCompareSlider = dynamic(
-  () => import("react-compare-slider").then(mod => mod.ReactCompareSlider),
-  { ssr: false }
-)
-
-
 
 const testimonials = [
   {
     name: "Dr. Anna Becker",
     role: "Leiterin Bewegungsdiagnostik, OrthoPlus",
     text: "Mit Kinemo konnten wir erstmals präzise Bewegungsanalysen in Echtzeit durchführen. Ein Meilenstein für unsere Diagnostik!",
-    image: "/testimonials/anna.jpg", 
+    image: "/testimonials/anna.jpg",
   },
   {
     name: "Prof. Markus Held",
@@ -31,14 +22,12 @@ const testimonials = [
 
 export default function KinemoShowcase() {
   const [activeTestimonial, setActiveTestimonial] = useState(0)
-
   const next = () => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
   const prev = () => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
 
   return (
     <section className="bg-white dark:bg-[#0f2b3b] py-16">
       <div className="container mx-auto px-6">
-
         {/* Headline */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-kinemo dark:text-white mb-4">Röntgenanalyse im Vergleich</h2>
@@ -49,25 +38,12 @@ export default function KinemoShowcase() {
 
         {/* Vergleichsslider */}
         <div className="max-w-4xl mx-auto mb-16">
-          <ReactCompareSlider
-            itemOne={
-              <Image
-                src="/xray-before.jpg"
-                alt="Vorher"
-                width={800}
-                height={450}
-                className="rounded-lg object-cover"
-              />
-            }
-            itemTwo={
-              <Image
-                src="/xray-after.jpg"
-                alt="Nachher"
-                width={800}
-                height={450}
-                className="rounded-lg object-cover"
-              />
-            }
+          <ReactCompareImage
+            leftImage="/xray-before.jpg"
+            rightImage="/xray-after.jpg"
+            sliderLineColor="#50C9E1"
+            handleSize={40}
+            alt="Vorher-Nachher Röntgenvergleich"
           />
         </div>
 
