@@ -43,7 +43,6 @@ export default function KinemoShowcase() {
             rightImage="/xray-after.jpg"
             sliderLineColor="#50C9E1"
             handleSize={40}
-            alt="Vorher-Nachher Röntgenvergleich"
           />
         </div>
 
