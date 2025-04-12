@@ -15,10 +15,20 @@ const config: Config = {
       },
       colors: {
         kinemo: {
-          DEFAULT: "#08415C",       // Hauptfarbe
-          light: "#50C9E1",         // Akzent
-          dark: "#061b26",          // Hintergrund Darkmode
-          soft: "#7DDBF3",          // Hover Akzent
+          DEFAULT: "#08415C",
+          light: "#50C9E1",
+          dark: "#061b26",
+          soft: "#7DDBF3",
+        },
+      },
+      animation: {
+        marquee: 'marquee 40s linear infinite',
+        'marquee-slow': 'marquee 60s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
     },
