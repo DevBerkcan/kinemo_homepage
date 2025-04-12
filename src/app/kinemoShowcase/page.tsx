@@ -5,10 +5,14 @@ import dynamic from "next/dynamic"
 import { useState } from "react"
 import { motion } from "framer-motion"
 
+
+
 const ReactCompareSlider = dynamic(
   () => import("react-compare-slider").then(mod => mod.ReactCompareSlider),
   { ssr: false }
 )
+
+
 
 const testimonials = [
   {
