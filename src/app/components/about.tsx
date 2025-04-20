@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { motion } from "framer-motion"
 
-export default function AboutMeSection() {
+export default function about() {
   const logos = [
     { name: "Start-up Center", src: "/Start-up-Center-Logo-Etikett-schwarz_Ausnahme.svg" },
     { name: "EFRE NRW", src: "/EFRE.NRW_.svg" },

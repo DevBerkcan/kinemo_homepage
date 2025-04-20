@@ -101,7 +101,7 @@ const XRay3DEffect = ({ className }: { className?: string }) => {
   )
 }
 
-export default function Hero() {
+export default function herosection() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
   const scrollRef = useRef<HTMLDivElement | null>(null)
   const { scrollYProgress } = useScroll()

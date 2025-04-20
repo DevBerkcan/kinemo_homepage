@@ -1,20 +1,21 @@
-
-import AboutMeSection from "./about/page"
-import Footer from "./footer/page"
+// page.tsx
+import Navbar from "@components/navigationsbar"
+import Hero from "@components/herosection"
+import KinemoShowcase from "@components/kinemoShowcase"
+import Contact from "@components/Contact"
+import Footer from "@components/Footer"
 import LogoBanner from "./helpercomponents/logoBanner"
-import Hero from "./herosection/page"
-import KinemoShowcase from "./kinemoShowcase/page"
-import Navbar from "./navigationbar/page"
-
+import About from "@components/about"
 
 export default function Home() {
   return (
     <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
-      <Navbar/>
+      <Navbar />
       <Hero />
-      <LogoBanner/>
-      <KinemoShowcase/>
-      <AboutMeSection />
+      <LogoBanner />
+      <KinemoShowcase />
+      <About />
+      <Contact />
       <Footer />
     </main>
   )

@@ -20,7 +20,7 @@ const testimonials = [
   },
 ]
 
-export default function KinemoShowcase() {
+export default function kinemoShowcase() {
   const [activeTestimonial, setActiveTestimonial] = useState(0)
   const next = () => setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
   const prev = () => setActiveTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
