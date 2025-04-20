@@ -64,6 +64,7 @@ export default function Footer() {
             <li><Link href="/benefits">Vorteile</Link></li>
             <li><Link href="/collaboration">Zusammenarbeit</Link></li>
             <li><Link href="/analysis">Analysen</Link></li>
+            <li><Link href="/blog">Blog & News</Link></li>
           </ul>
         </div>
 
