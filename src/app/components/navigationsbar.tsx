@@ -202,7 +202,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-6 pb-4 overflow-x-auto thin-scrollbar">
+          <nav className="hidden md:flex flex-wrap gap-6 pb-4">
             {menu.map((item, idx) => (
               <div key={idx} className="relative group">
                 <Link
@@ -242,12 +242,13 @@ export default function Navbar() {
         <AnimatePresence>
           {isOpen && (
             <motion.nav
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden bg-white dark:bg-[#061b26] px-6 pb-6 overflow-hidden"
-            >
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-full left-0 w-full z-40 bg-white dark:bg-[#061b26] px-6 pb-6 shadow-xl border-t border-gray-100 dark:border-[#1a3a4b]"
+          >
+          
               <div className="max-h-[70vh] overflow-y-auto py-2">
                 {menu.map((item, idx) => (
                   <div key={idx} className="mt-4">

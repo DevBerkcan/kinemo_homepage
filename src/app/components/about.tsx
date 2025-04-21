@@ -24,7 +24,7 @@ export default function about() {
         >
           <img
             src="https://picsum.photos/600/600"
-            alt="Portrait von Berkcan Atesoglu"
+            alt="Portrait von Sercan Atesoglu"
             className="w-full h-auto rounded-xl shadow-2xl object-cover border-4 border-kinemo"
           />
         </motion.div>
@@ -40,7 +40,7 @@ export default function about() {
             Meine Geschichte
           </h2>
           <p className="text-lg leading-relaxed mb-6">
-            Mein Name ist Berkcan Atesoglu – ich glaube daran, dass Bewegung der Schlüssel zu einem erfüllten Leben ist.
+            Mein Name ist Sercan Atesoglu – ich glaube daran, dass Bewegung der Schlüssel zu einem erfüllten Leben ist.
             In meiner Laufbahn habe ich gelernt, dass nicht nur Technik zählt, sondern auch echtes Zuhören und Verstehen.
           </p>
           <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
