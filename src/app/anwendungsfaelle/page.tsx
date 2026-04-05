@@ -2,11 +2,15 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Microscope, Zap, Eye, Layers, Component, Ruler } from "lucide-react"
+import { createBreadcrumbJsonLd, createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Anwendungsfälle – Industrielle CT & Röntgenanalyse | Kinemo",
-  description: "Typische Anwendungsfälle der industriellen CT und Röntgenanalyse: Lunkerprüfung, Lötstellenanalyse, Fremdkörpererkennung, Rissanalyse, Baugruppenkontrolle und Toleranzvergleiche.",
-}
+export const metadata = createPageMetadata({
+  title: "Anwendungsfälle für industrielle CT und Röntgenanalyse",
+  description:
+    "Typische Anwendungsfälle der industriellen CT und Röntgenanalyse: Lunkerprüfung, Lötstellenanalyse, Fremdkörpererkennung, Rissanalyse, Baugruppenkontrolle und Soll-Ist-Vergleiche.",
+  path: "/anwendungsfaelle",
+  keywords: ["Anwendungsfälle industrielle CT", "Lötstellenanalyse", "Fremdkörpererkennung"],
+})
 
 const useCases = [
   {
@@ -105,8 +109,17 @@ const faqItems = [
 ]
 
 export default function AnwendungsfaellePage() {
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Anwendungsfälle", path: "/anwendungsfaelle" },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}

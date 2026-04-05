@@ -1,35 +1,30 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { createPageMetadata, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Kinemo – Industrielle CT & Röntgenanalyse für Produktentwicklung und Qualitätssicherung",
+    description:
+      "Kinemo macht verborgene Fehler in Bauteilen und Baugruppen sichtbar – mit industrieller CT, Röntgenanalyse und zerstörungsfreier Prüfung für Produktentwicklung und Qualitätssicherung.",
+    path: "/",
+    keywords: ["industrielle Röntgenprüfung", "CT Dienstleister", "Bauteilprüfung 3D"],
+  }),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Kinemo – Industrielle CT & Röntgenanalyse für die Produktentwicklung",
+    default: "Kinemo – Industrielle CT & Röntgenanalyse",
     template: "%s | Kinemo",
   },
-  description:
-    "Kinemo macht verborgene Fehler in Bauteilen und Baugruppen sichtbar – mit industrieller CT und Röntgenanalyse. Zerstörungsfrei, präzise, Ergebnisse in 48h.",
-  keywords: [
-    "industrielle CT",
-    "Computertomographie",
-    "Röntgenanalyse",
-    "zerstörungsfreie Prüfung",
-    "ZfP",
-    "Lunkeranalyse",
-    "Fehleranalyse",
-    "Produktentwicklung",
-    "Qualitätssicherung",
-    "Kinemo",
-  ],
-  openGraph: {
-    title: "Kinemo – Industrielle CT & Röntgenanalyse für die Produktentwicklung",
-    description:
-      "Verborgene Produktfehler sichtbar machen – bevor sie Zeit und Geld kosten.",
-    url: "https://www.kinemo.de",
-    siteName: "Kinemo",
-    locale: "de_DE",
-    type: "website",
+  applicationName: "Kinemo",
+  referrer: "origin-when-cross-origin",
+  authors: [{ name: "Kinemo" }],
+  creator: "Kinemo",
+  publisher: "Kinemo",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
-  metadataBase: new URL("https://www.kinemo.de"),
 };
 
 export default function RootLayout({

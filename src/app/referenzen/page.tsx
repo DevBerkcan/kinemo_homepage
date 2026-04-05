@@ -2,11 +2,15 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Building2 } from "lucide-react"
+import { createBreadcrumbJsonLd, createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Referenzen & Case Studies | Kinemo",
-  description: "Echte Praxisbeispiele: Wie Kinemo Unternehmen aus Automotive, Elektronik und Medizintechnik dabei hilft, verborgene Fehler frühzeitig zu erkennen.",
-}
+export const metadata = createPageMetadata({
+  title: "Referenzen und Case Studies für industrielle CT",
+  description:
+    "Praxisbeispiele aus Automotive, Elektronik, Medizintechnik und Kunststoff: Wie Kinemo verborgene Fehler früh erkennt und Entwicklungsrisiken reduziert.",
+  path: "/referenzen",
+  keywords: ["Case Studies industrielle CT", "Referenzen Röntgenanalyse", "Praxisbeispiele ZfP"],
+})
 
 const caseStudies = [
   {
@@ -76,8 +80,17 @@ const caseStudies = [
 ]
 
 export default function ReferenzenPage() {
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Referenzen", path: "/referenzen" },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}

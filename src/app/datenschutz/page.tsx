@@ -1,6 +1,14 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/navigationsbar";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Datenschutzerklärung",
+  description: "Datenschutzerklärung von Kinemo gemäß DSGVO.",
+  path: "/datenschutz",
+  noindex: true,
+});
 
 export default function Datenschutz() {
   return (

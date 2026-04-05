@@ -2,11 +2,15 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import Link from "next/link"
 import { Car, Cpu, Box, Cog, HeartPulse, ShoppingBag, ArrowRight, CheckCircle } from "lucide-react"
+import { createBreadcrumbJsonLd, createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Branchen – Industrielle CT & Röntgenanalyse | Kinemo",
-  description: "Kinemo unterstützt Unternehmen aus Automotive, Elektronik, Kunststoff, Maschinenbau, Medizintechnik und Konsumgütern bei der zerstörungsfreien Bauteilprüfung.",
-}
+export const metadata = createPageMetadata({
+  title: "Branchen für industrielle CT und Röntgenanalyse",
+  description:
+    "Kinemo unterstützt Automotive, Elektronik, Kunststoff, Maschinenbau, Medizintechnik und technische Produkte mit zerstörungsfreier Bauteilprüfung per CT und Röntgenanalyse.",
+  path: "/branchen",
+  keywords: ["Automotive CT", "Elektronik Röntgenanalyse", "Medizintechnik CT"],
+})
 
 const industries = [
   {
@@ -66,8 +70,17 @@ const industries = [
 ]
 
 export default function BranchenPage() {
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Branchen", path: "/branchen" },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}

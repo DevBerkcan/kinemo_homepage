@@ -6,41 +6,7 @@ import Navbar from "../components/navigationsbar"
 import Footer from "../components/Footer"
 import { useState } from "react"
 import { motion } from "framer-motion"
-
-const blogPosts = [
-  {
-    slug: "was-ist-industrielle-ct",
-    title: "Was ist industrielle Computertomographie?",
-    excerpt: "Industrielle CT macht das Innere von Bauteilen sichtbar – zerstörungsfrei, präzise und in 3D. Wir erklären, wie das Verfahren funktioniert und wann es sich lohnt.",
-    date: "2026-03-15",
-    tags: ["Industrielle CT", "Technologie"],
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
-  },
-  {
-    slug: "fehler-entwicklungsphase-kosten",
-    title: "Warum Fehler in der Entwicklungsphase am teuersten werden",
-    excerpt: "Je später ein Fehler erkannt wird, desto höher die Kosten. Wir zeigen anhand konkreter Zahlen, warum frühe Prüfung die wirtschaftlichste Entscheidung ist.",
-    date: "2026-02-28",
-    tags: ["Produktentwicklung", "Qualität"],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
-  },
-  {
-    slug: "lunkererkennung-gussteile",
-    title: "Lunker in Gussteilen frühzeitig erkennen",
-    excerpt: "Lunker und Porositäten in Aluminiumgussteilen sind von außen nicht sichtbar – aber mit CT klar erkennbar. Was Sie darüber wissen sollten.",
-    date: "2026-02-10",
-    tags: ["Fehleranalyse", "Guss", "Lunker"],
-    image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=600&h=400&fit=crop",
-  },
-  {
-    slug: "ct-vs-roentgen",
-    title: "CT oder 2D-Röntgen – wann welches Verfahren?",
-    excerpt: "CT und Röntgen haben unterschiedliche Stärken. Dieser Beitrag hilft Ihnen zu entscheiden, welches Verfahren für Ihre Prüfaufgabe das Richtige ist.",
-    date: "2026-01-20",
-    tags: ["CT", "Röntgen", "Verfahrensvergleich"],
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
-  },
-]
+import { blogPosts } from "@/lib/blog-posts"
   
 
 export default function BlogPage() {
@@ -56,6 +22,26 @@ export default function BlogPage() {
   return (
     <>
       <Navbar />
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            name: "Kinemo Blog",
+            description:
+              "Fachbeiträge zu industrieller CT, Röntgenanalyse, Fehleranalyse und Qualitätssicherung.",
+            url: "https://www.kinemo.de/blog",
+            blogPost: blogPosts.map((post) => ({
+              "@type": "BlogPosting",
+              headline: post.title,
+              datePublished: post.date,
+              url: `https://www.kinemo.de/blog/${post.slug}`,
+            })),
+          }),
+        }}
+      />
 
       <main className="max-w-7xl mx-auto px-6 py-20">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10 gap-6">

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react"
+import { createBreadcrumbJsonLd, organizationJsonLd } from "@/lib/seo"
 
 export default function KontaktPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "", privacy: false })
@@ -54,8 +55,31 @@ export default function KontaktPage() {
     }, 1500)
   }
 
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Kontakt", path: "/kontakt" },
+  ])
+
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: "Kontakt Kinemo",
+    url: "https://www.kinemo.de/kontakt",
+    description:
+      "Kontaktseite für Anfragen zu industrieller CT, Röntgenanalyse und zerstörungsfreier Prüfung.",
+    mainEntity: organizationJsonLd,
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactPageSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}

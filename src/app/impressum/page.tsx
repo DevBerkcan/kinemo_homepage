@@ -1,6 +1,14 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/navigationsbar";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Impressum",
+  description: "Rechtliche Anbieterkennzeichnung von Kinemo.",
+  path: "/impressum",
+  noindex: true,
+});
 
 export default function ImpressumPage() {
   return (

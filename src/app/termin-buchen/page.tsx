@@ -4,6 +4,7 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import { useState } from "react"
 import { Phone, Mail, Clock, CheckCircle, CalendarCheck } from "lucide-react"
+import { createBreadcrumbJsonLd } from "@/lib/seo"
 
 const trustItems = [
   { icon: Clock, text: "Antwort in der Regel innerhalb von 24h" },
@@ -41,8 +42,17 @@ export default function TerminBuchenPage() {
     }, 1200)
   }
 
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Termin buchen", path: "/termin-buchen" },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}

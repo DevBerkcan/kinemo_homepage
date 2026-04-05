@@ -2,11 +2,15 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import Link from "next/link"
 import { Scan, Radio, SearchX, FlaskConical, GitCompare, FileText, ArrowRight, CheckCircle } from "lucide-react"
+import { createBreadcrumbJsonLd, createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Leistungen – Industrielle CT & Röntgenanalyse | Kinemo",
-  description: "Von der industriellen Computertomographie bis zur Entwicklungsbegleitung – präzise Analyseleistungen für Ihre Produktentwicklung und Qualitätssicherung.",
-}
+export const metadata = createPageMetadata({
+  title: "Leistungen für industrielle CT, Röntgenanalyse und Fehleranalyse",
+  description:
+    "Von industrieller Computertomographie über 2D-Röntgenanalyse bis zur Fehler- und Schadensanalyse: Kinemo unterstützt Produktentwicklung und Qualitätssicherung mit präzisen Prüfleistungen.",
+  path: "/leistungen",
+  keywords: ["Leistungen industrielle CT", "2D Röntgenanalyse", "Schadensanalyse"],
+})
 
 const services = [
   {
@@ -103,8 +107,39 @@ const services = [
 ]
 
 export default function LeistungenPage() {
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Leistungen", path: "/leistungen" },
+  ])
+
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Industrielle CT und Röntgenanalyse",
+    serviceType: [
+      "Industrielle Computertomographie",
+      "2D-Röntgenanalyse",
+      "Fehleranalyse",
+      "Entwicklungsbegleitende Prüfung",
+    ],
+    provider: {
+      "@type": "Organization",
+      name: "Kinemo",
+      url: "https://www.kinemo.de",
+    },
+    areaServed: "DE",
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}

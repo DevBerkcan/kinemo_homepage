@@ -14,21 +14,28 @@ import PainPointSection from "./components/PainPointSection"
 import ServicesPreview from "./components/ServicesPreview"
 import IndustriesSection from "./components/IndustriesSection"
 import ProcessSteps from "./components/ProcessSteps"
+import {
+  BRAND_NAME,
+  SITE_URL,
+  createBreadcrumbJsonLd,
+  organizationJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo"
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "Kinemo",
+  "@type": "ProfessionalService",
+  name: BRAND_NAME,
   description:
     "Industrielle CT und Röntgenanalyse für Produktentwicklung und Qualitätssicherung. Zerstörungsfreie Bauteilprüfung in 48h.",
-  url: "https://www.kinemo.de",
+  url: SITE_URL,
   telephone: "+4915205765010",
   email: "contact@kinemo.de",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Talstraße 71",
-    addressLocality: "Velbert",
-    postalCode: "42551",
+    streetAddress: "Heinz-Fangman-Str. 2",
+    addressLocality: "Wuppertal",
+    postalCode: "42287",
     addressCountry: "DE",
   },
   areaServed: "DE",
@@ -37,6 +44,20 @@ const localBusinessSchema = {
     "Röntgenanalyse",
     "Zerstörungsfreie Prüfung",
     "Fehleranalyse",
+  ],
+}
+
+const homepageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Kinemo – Industrielle CT & Röntgenanalyse",
+  url: SITE_URL,
+  description:
+    "Industrielle CT und Röntgenanalyse für Produktentwicklung, Fehleranalyse und Qualitätssicherung.",
+  about: [
+    "Industrielle Computertomographie",
+    "Röntgenanalyse",
+    "Zerstörungsfreie Prüfung",
   ],
 }
 
@@ -96,7 +117,27 @@ export default function Home() {
       />
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            createBreadcrumbJsonLd([{ name: "Startseite", path: "/" }])
+          ),
+        }}
       />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         <Navbar />

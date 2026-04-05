@@ -2,11 +2,15 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import Link from "next/link"
 import { ArrowRight, CheckCircle, Scan, Layers, Microscope, GitCompare, ShieldCheck, AlertTriangle } from "lucide-react"
+import { createBreadcrumbJsonLd, createPageMetadata } from "@/lib/seo"
 
-export const metadata = {
-  title: "Technologie – Industrielle CT & Röntgenanalyse | Kinemo",
-  description: "Was ist industrielle CT? Wie unterscheidet sich CT von klassischem Röntgen? Alles über zerstörungsfreie Prüfung, Visualisierung und Einsatzmöglichkeiten.",
-}
+export const metadata = createPageMetadata({
+  title: "Technologie hinter industrieller CT und Röntgenanalyse",
+  description:
+    "Was ist industrielle CT, wie unterscheidet sie sich von klassischem Röntgen und wann lohnt sich welches Verfahren? Technologiewissen für Entwicklung und Qualitätssicherung.",
+  path: "/technologie",
+  keywords: ["Was ist industrielle CT", "CT vs Röntgen", "Technologie ZfP"],
+})
 
 const ctVsXray = [
   { aspect: "Darstellung", ct: "3D – vollständiges Volumenmodell", xray: "2D – Projektion von oben" },
@@ -58,8 +62,17 @@ const limits = [
 ]
 
 export default function TechnologiePage() {
+  const breadcrumbSchema = createBreadcrumbJsonLd([
+    { name: "Startseite", path: "/" },
+    { name: "Technologie", path: "/technologie" },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Navbar />
       <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
         {/* Hero */}
