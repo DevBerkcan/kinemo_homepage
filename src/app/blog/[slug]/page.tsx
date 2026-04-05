@@ -136,8 +136,13 @@ const blogPosts: Record<string, Post> = {
   },
 }
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = blogPosts[params.slug]
+type BlogPostPageProps = {
+  params: Promise<{ slug: string }>
+}
+
+export default async function BlogPost({ params }: BlogPostPageProps) {
+  const { slug } = await params
+  const post = blogPosts[slug]
   if (!post) return notFound()
 
   const articleSchema = {
@@ -148,8 +153,8 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
     dateModified: post.date,
     author: { "@type": "Organization", name: "Kinemo", url: BASE_URL },
     publisher: { "@type": "Organization", name: "Kinemo", url: BASE_URL },
-    url: `${BASE_URL}/blog/${params.slug}`,
-    mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/blog/${params.slug}` },
+    url: `${BASE_URL}/blog/${slug}`,
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/blog/${slug}` },
   }
 
   return (
