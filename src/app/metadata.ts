@@ -1,19 +1,24 @@
-// src/app/herosection/metadata.ts
+// src/app/metadata.ts
 export const metadata = {
-  title: "Kinemo - 3D-Röntgenanalyse und dynamische Bewegungsdarstellung",
+  title: "Kinemo – Industrielle CT & Röntgenanalyse für die Produktentwicklung",
   description:
-    "Hochmoderne 3D-Röntgenanalyse in Echtzeit. Unsere innovative Technologie macht Bewegungen sichtbar und liefert präzise Einblicke in komplexe Systeme.",
+    "Kinemo macht verborgene Fehler in Bauteilen und Baugruppen sichtbar – mit industrieller Computertomographie und Röntgenanalyse. Zerstörungsfrei, präzise, innerhalb von 48h.",
   keywords: [
-    "3D-Röntgen",
-    "Bewegungsanalyse",
-    "Dynamische CT",
-    "Echtzeit-Bildgebung",
+    "industrielle CT",
+    "Computertomographie",
+    "Röntgenanalyse",
+    "zerstörungsfreie Prüfung",
+    "ZfP",
+    "Lunkeranalyse",
+    "Fehleranalyse",
+    "Produktentwicklung",
+    "Qualitätssicherung",
     "Kinemo",
   ],
   openGraph: {
-    title: "Kinemo - 3D-Röntgenanalyse in Bewegung",
+    title: "Kinemo – Industrielle CT & Röntgenanalyse für die Produktentwicklung",
     description:
-      "Sehen Sie, was andere nicht sehen können - mit unserer patentierten 3D-Röntgentechnologie für Bewegungsanalysen.",
+      "Verborgene Produktfehler sichtbar machen – bevor sie Zeit und Geld kosten. Industrielle CT und Röntgenanalyse von Kinemo.",
     url: "https://www.kinemo.de",
     siteName: "Kinemo",
     images: [
@@ -21,7 +26,7 @@ export const metadata = {
         url: "/og-image-xray.jpg",
         width: 1200,
         height: 630,
-        alt: "Kinemo Röntgenanalyse",
+        alt: "Kinemo – Industrielle CT & Röntgenanalyse",
       },
     ],
     locale: "de_DE",
@@ -29,16 +34,15 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kinemo - 3D-Röntgenanalyse in Bewegung",
+    title: "Kinemo – Industrielle CT & Röntgenanalyse",
     description:
-      "Sehen Sie, was andere nicht sehen können - mit unserer patentierten 3D-Röntgentechnologie für Bewegungsanalysen.",
+      "Verborgene Produktfehler sichtbar machen – bevor sie Zeit und Geld kosten.",
     images: ["/og-image-xray.jpg"],
   },
   alternates: {
     canonical: "https://www.kinemo.de",
     languages: {
-      en: "https://www.kinemo.de/en",
-      de: "https://www.kinemo.de/de",
+      de: "https://www.kinemo.de",
     },
   },
 };

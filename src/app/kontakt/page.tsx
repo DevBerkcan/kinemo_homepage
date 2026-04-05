@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import Navbar from "@components/navigationsbar"
+import Footer from "@components/Footer"
+import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react"
 
-export default function Contact() {
+export default function KontaktPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "", privacy: false })
   const [success, setSuccess] = useState(false)
   const [errors, setErrors] = useState<{ [key: string]: string }>({})
@@ -29,10 +32,9 @@ export default function Contact() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const target = e.target as HTMLInputElement
     const { name, value, type } = target
-    const checked = (target.type === "checkbox") ? target.checked : undefined
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? target.checked : value
     }))
   }
 
@@ -43,6 +45,7 @@ export default function Contact() {
       setErrors(validationErrors)
       return
     }
+    setErrors({})
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
@@ -52,149 +55,232 @@ export default function Contact() {
   }
 
   return (
-    <section className="relative bg-[#F9FAFB] dark:bg-[#05151f] py-24 px-6">
-      <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-start">
-        {/* Text-Bereich */}
-        <div>
-          <p className="text-sm text-[#FF6600] font-semibold uppercase mb-2">Wir freuen uns auf Ihre Nachricht</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#08415C] dark:text-[#50C9E1] mb-6">Kontakt</h2>
-          <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-            Kontaktieren Sie uns gern per Mail oder rufen Sie uns direkt an, damit wir Ihr Vorhaben besprechen können.
-          </p>
-          <div className="space-y-2">
-            <p className="flex items-center gap-2 font-medium text-[#08415C] dark:text-white">
-              📞 <span>+49 1520 576 5010</span>
+    <>
+      <Navbar />
+      <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
+        {/* Hero */}
+        <section className="bg-gradient-to-br from-[#08415C] to-[#061b26] text-white py-20 px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="text-sm text-[#50C9E1] font-semibold uppercase tracking-widest mb-3">
+              Kontakt aufnehmen
             </p>
-            <p className="flex items-center gap-2 font-medium text-[#08415C] dark:text-white">
-              📧 <span>contact@kinemo.de</span>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Jetzt Analyse anfragen
+            </h1>
+            <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+              Beschreiben Sie Ihr Bauteil und Ihre Fragestellung – wir melden uns in der Regel
+              innerhalb von 24 Stunden und klären gemeinsam den nächsten Schritt.
             </p>
           </div>
-        </div>
+        </section>
 
-        {/* Formular */}
-        <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2 text-[#08415C] dark:text-[#50C9E1]">Ihr Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Vor- und Nachname"
-              className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-[#1a1a1a] dark:text-white placeholder-gray-400"
-            />
-            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left: Info */}
+            <div>
+              <h2 className="text-2xl font-bold text-[#08415C] dark:text-white mb-6">
+                Wir freuen uns auf Ihre Anfrage
+              </h2>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+                Egal ob Sie konkrete Prüfaufgaben haben, einen Prozess verbessern oder einfach
+                herausfinden möchten, ob industrielle CT für Ihr Projekt geeignet ist –
+                sprechen Sie uns an.
+              </p>
+
+              <div className="space-y-4 mb-10">
+                {[
+                  { icon: Phone, label: "Telefon", value: "+49 1520 576 5010", href: "tel:+4915205765010" },
+                  { icon: Mail, label: "E-Mail", value: "contact@kinemo.de", href: "mailto:contact@kinemo.de" },
+                  { icon: MapPin, label: "Labor", value: "Talstraße 71, 42551 Velbert" },
+                  { icon: Clock, label: "Antwortzeit", value: "In der Regel innerhalb von 24h" },
+                ].map((item, i) => {
+                  const Icon = item.icon
+                  return (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-[#08415C]/10 dark:bg-[#50C9E1]/10 flex items-center justify-center flex-shrink-0">
+                        <Icon size={18} className="text-[#08415C] dark:text-[#50C9E1]" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">{item.label}</p>
+                        {item.href ? (
+                          <a href={item.href} className="font-medium text-[#08415C] dark:text-white hover:text-[#50C9E1] transition-colors">
+                            {item.value}
+                          </a>
+                        ) : (
+                          <p className="font-medium text-[#08415C] dark:text-white">{item.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <div className="bg-[#08415C]/5 dark:bg-[#50C9E1]/5 border border-[#08415C]/10 dark:border-[#50C9E1]/10 rounded-2xl p-6">
+                <h3 className="font-semibold text-[#08415C] dark:text-white mb-3">Was im Erstgespräch geklärt wird:</h3>
+                <ul className="space-y-2">
+                  {[
+                    "Welches Bauteil / welche Baugruppe soll geprüft werden?",
+                    "Welche Fragestellung steht im Vordergrund?",
+                    "Welches Analyseverfahren ist am besten geeignet?",
+                    "Wie ist der zeitliche Rahmen?",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+                      <CheckCircle size={15} className="text-[#50C9E1] flex-shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Right: Form */}
+            <div className="bg-gray-50 dark:bg-[#0f2b3b] rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-sm">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <h3 className="text-xl font-bold text-[#08415C] dark:text-white mb-2">
+                  Nachricht senden
+                </h3>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="Vor- und Nachname"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                    />
+                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Unternehmen <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={form.company}
+                      onChange={handleChange}
+                      placeholder="Muster GmbH"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                    />
+                    {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company}</p>}
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      E-Mail <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
+                      placeholder="max@muster.de"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                    />
+                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Telefon
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleChange}
+                      placeholder="+49 ..."
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Ihre Anfrage
+                  </label>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="Welches Bauteil soll geprüft werden? Was ist Ihre Fragestellung?"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition resize-none"
+                  />
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    name="privacy"
+                    checked={form.privacy}
+                    onChange={handleChange}
+                    className="mt-1 accent-[#50C9E1]"
+                  />
+                  <label htmlFor="privacy" className="text-sm text-gray-600 dark:text-gray-400">
+                    Ich habe die{" "}
+                    <a href="/datenschutz" className="text-[#50C9E1] hover:underline">
+                      Datenschutzerklärung
+                    </a>{" "}
+                    gelesen und stimme der Verarbeitung meiner Daten zu. <span className="text-red-500">*</span>
+                  </label>
+                </div>
+                {errors.privacy && <p className="text-red-500 text-xs -mt-3">{errors.privacy}</p>}
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-[#50C9E1] hover:bg-[#7DDBF3] disabled:opacity-60 text-[#08415C] font-semibold px-8 py-4 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
+                >
+                  {loading ? "Wird gesendet..." : "Jetzt Analyse anfragen"}
+                </button>
+              </form>
+            </div>
           </div>
+        </section>
+      </main>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2 text-[#08415C] dark:text-[#50C9E1]">
-              Ihre E-Mail-Adresse <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="mustermann@musterfirma.de"
-              className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-[#1a1a1a] dark:text-white placeholder-gray-400"
-            />
-            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium mb-2 text-[#08415C] dark:text-[#50C9E1]">Telefonnummer</label>
-            <input
-              type="text"
-              id="phone"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="Damit wir uns direkt bei Ihnen melden können."
-              className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-[#1a1a1a] dark:text-white placeholder-gray-400"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="company" className="block text-sm font-medium mb-2 text-[#08415C] dark:text-[#50C9E1]">
-              Unternehmen <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="company"
-              name="company"
-              value={form.company}
-              onChange={handleChange}
-              placeholder="Musterfirma"
-              className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-[#1a1a1a] dark:text-white placeholder-gray-400"
-            />
-            {errors.company && <p className="text-red-500 text-sm mt-1">{errors.company}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2 text-[#08415C] dark:text-[#50C9E1]">Ihre Nachricht</label>
-            <textarea
-              id="message"
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              rows={5}
-              placeholder="Details zu Ihrem Vorhaben oder Anliegen"
-              className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-[#1a1a1a] dark:text-white placeholder-gray-400"
-            />
-            {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              id="privacy"
-              name="privacy"
-              checked={form.privacy}
-              onChange={handleChange}
-              className="accent-[#FF6600]"
-            />
-            <label htmlFor="privacy" className="text-sm text-gray-600 dark:text-gray-400">
-              Ich habe die <a href="/datenschutz" className="text-[#FF6600] underline">Datenschutzerklärung</a> zur Kenntnis genommen.
-            </label>
-          </div>
-          {errors.privacy && <p className="text-red-500 text-sm -mt-4 mb-4">{errors.privacy}</p>}
-
-          <div className="text-left">
-            <button
-              type="submit"
-              disabled={loading}
-              className="inline-block bg-[#FF6600] hover:bg-orange-500 text-white font-semibold px-8 py-3 rounded-full transition disabled:opacity-50"
-            >
-              {loading ? "Wird gesendet..." : "Absenden"}
-            </button>
-          </div>
-        </form>
-      </div>
-
+      {/* Success Modal */}
       <AnimatePresence>
         {success && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center px-6"
           >
-            <div className="bg-white dark:bg-[#0f2b3b] text-center px-8 py-12 rounded-xl shadow-xl max-w-md w-full">
-              <h3 className="text-2xl font-bold text-[#08415C] dark:text-[#50C9E1] mb-4">Vielen Dank!</h3>
-              <p className="text-gray-700 dark:text-gray-300 mb-6">Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns in Kürze bei Ihnen.</p>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-white dark:bg-[#0f2b3b] text-center px-8 py-12 rounded-2xl shadow-2xl max-w-md w-full border border-gray-200 dark:border-gray-700"
+            >
+              <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-6">
+                <CheckCircle size={32} className="text-green-500" />
+              </div>
+              <h3 className="text-2xl font-bold text-[#08415C] dark:text-white mb-3">Vielen Dank!</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Ihre Nachricht wurde erfolgreich übermittelt. Wir melden uns in der Regel innerhalb von 24 Stunden bei Ihnen.
+              </p>
               <button
                 onClick={() => setSuccess(false)}
-                className="mt-2 inline-block bg-[#FF6600] hover:bg-orange-500 text-white font-semibold px-6 py-2 rounded-full"
+                className="bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-6 py-3 rounded-full transition"
               >
                 Fenster schließen
               </button>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+
+      <Footer />
+    </>
   )
 }

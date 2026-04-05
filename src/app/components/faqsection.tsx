@@ -7,24 +7,29 @@ import Link from "next/link"
 
 const faqs = [
   {
-    question: "Was ist das Besondere an der Kinemo-Röntgentechnik?",
+    question: "Welche Bauteile und Materialien können geprüft werden?",
     answer:
-      "Unsere Technologie ermöglicht die Echtzeit-Analyse von Bewegung im Inneren eines Produkts – mit höchster Präzision und Auflösung.",
+      "Grundsätzlich können alle festen Materialien geprüft werden – von Metallen (Aluminium, Stahl, Guss) über Kunststoffe und Verbundwerkstoffe bis hin zu elektronischen Baugruppen. Auch Mischbauteile aus verschiedenen Materialien sind analysierbar. Die Bauteilgröße reicht von Mikrokomponenten bis hin zu größeren Baugruppen.",
   },
   {
-    question: "Für welche Branchen eignet sich Kinemo?",
+    question: "Ist die Analyse zerstörungsfrei?",
     answer:
-      "Ideal für Automobil, Maschinenbau, Medizintechnik und jede Branche mit beweglichen Bauteilen in der Produktentwicklung.",
+      "Ja, vollständig. Industrielle CT und Röntgenanalyse sind zerstörungsfreie Prüfverfahren (ZfP). Ihr Bauteil bleibt nach der Analyse in unverändertem Zustand und kann weiterverwendet werden. Das ist besonders wichtig für teure Prototypen oder sicherheitsrelevante Komponenten.",
   },
   {
-    question: "Wie schnell bekomme ich Ergebnisse?",
+    question: "Wie schnell erhalten wir die Ergebnisse?",
     answer:
-      "In der Regel innerhalb von 48 Stunden nach Datenerfassung – inklusive Visualisierungen und Auswertungen.",
+      "In der Regel erhalten Sie Ihre Ergebnisse innerhalb von 48 Stunden nach Eingang des Bauteils. Der Bericht enthält annotierte CT-Schnittbilder, 3D-Rekonstruktionen und klare Handlungsempfehlungen. Bei dringendem Bedarf sprechen Sie uns einfach an – wir finden eine Lösung.",
   },
   {
-    question: "Können auch sehr kleine Bauteile geröntgt werden?",
+    question: "In welcher Entwicklungsphase ist eine CT-Analyse sinnvoll?",
     answer:
-      "Ja. Unsere Technologie bietet detailreiche Einblicke selbst bei Mikromechanik-Komponenten oder feinen Werkstoffstrukturen.",
+      "Je früher, desto besser – und damit günstiger. Eine Analyse lohnt sich bereits beim ersten Prototypen, bei der Vorserie und vor Serienfreigaben. Gerade in frühen Phasen lassen sich Konstruktionsfehler und Prozessprobleme noch kostengünstig beheben, bevor sie in die Serie übergehen.",
+  },
+  {
+    question: "Können auch kleine Serien oder Einzelprototypen analysiert werden?",
+    answer:
+      "Ja. Kinemo arbeitet sowohl mit Einzelprototypen als auch mit kleinen Serien. Es gibt keine Mindestmengenanforderung. Gerade für Unternehmen in frühen Entwicklungsphasen ist die Analyse einzelner Bauteile besonders wertvoll, um Konstruktionsentscheidungen abzusichern.",
   },
 ]
 
@@ -84,7 +89,7 @@ export default function FAQSection() {
             Wir beraten Sie gerne individuell zu Ihrer Anwendung.
           </p>
           <Link
-            href="/contact"
+            href="/kontakt"
             className="inline-block bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-6 py-3 rounded-md transition"
           >
             Kontaktieren Sie uns

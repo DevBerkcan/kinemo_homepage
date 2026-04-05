@@ -21,7 +21,7 @@ export default function Footer() {
             KIN<span className="text-[#50C9E1]">EMO</span>
           </h4>
           <p className="text-sm leading-relaxed text-white/90">
-            Wir helfen Unternehmen dabei, die innere Bewegung von Produkten zu sehen und zu bewerten.
+            Industrielle CT und Röntgenanalyse für Unternehmen, die verborgene Fehler frühzeitig erkennen wollen.
           </p>
           <p className="text-sm mt-4">📞 +49 1520 576 5010</p>
           <p className="text-sm">📬 contact@kinemo.de</p>
@@ -60,11 +60,14 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-lg mb-4">Navigation</h4>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/" className="text-[#FF6B00]">Startseite</Link></li>
-            <li><Link href="/benefits">Vorteile</Link></li>
-            <li><Link href="/collaboration">Zusammenarbeit</Link></li>
-            <li><Link href="/analysis">Analysen</Link></li>
-            <li><Link href="/blog">Blog & News</Link></li>
+            <li><Link href="/" className="hover:text-[#50C9E1] transition-colors">Startseite</Link></li>
+            <li><Link href="/leistungen" className="hover:text-[#50C9E1] transition-colors">Leistungen</Link></li>
+            <li><Link href="/branchen" className="hover:text-[#50C9E1] transition-colors">Branchen</Link></li>
+            <li><Link href="/anwendungsfaelle" className="hover:text-[#50C9E1] transition-colors">Anwendungsfälle</Link></li>
+            <li><Link href="/technologie" className="hover:text-[#50C9E1] transition-colors">Technologie</Link></li>
+            <li><Link href="/referenzen" className="hover:text-[#50C9E1] transition-colors">Referenzen</Link></li>
+            <li><Link href="/blog" className="hover:text-[#50C9E1] transition-colors">Blog & Wissen</Link></li>
+            <li><Link href="/kontakt" className="hover:text-[#50C9E1] transition-colors">Kontakt</Link></li>
           </ul>
         </div>
 

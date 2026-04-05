@@ -2,96 +2,101 @@
 
 import { useEffect, useState, useRef } from "react"
 import Link from "next/link"
-import Image from "next/image"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ChevronDown, ArrowRight, Play, Scan } from "lucide-react"
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
+import { ChevronDown, ArrowRight, Play, Scan, CheckCircle, Star } from "lucide-react"
 
-
-
-// Typen für 3D-Animation
-interface XRaySimulation {
-  isActive: boolean;
-  initializeAnimation: () => void;
-  destroyAnimation: () => void;
-}
-
-// Komponente zur Steuerung der 3D-Röntgenanimation
+// Optimierte 3D-Röntgen-Simulation
 const XRay3DEffect = ({ className }: { className?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [simulation, setSimulation] = useState<XRaySimulation | null>(null)
-  
-  useEffect(() => {
-    // Diese Funktion würde normalerweise die Three.js-Animation initialisieren
-    // Für dieses Beispiel beschreiben wir die Funktionalität
-    
-    const setupXRaySimulation = (): XRaySimulation => {
-      // In einer echten Implementierung würden hier Three.js-Elemente erstellt:
-      // - Eine 3D-Szene mit einem Objekt (z.B. ein Maschinenteil)
-      // - Ein Röntgeneffekt-Shader, der das Objekt "durchleuchtet"
-      // - Eine Animation, die den Röntgenstrahl um das Objekt rotieren lässt
-      
-      const simulation: XRaySimulation = {
-        isActive: true,
-        
-        initializeAnimation: () => {
-          // In der echten Implementierung würden hier drei.js Elemente initialisiert
-          console.log("3D Röntgensimulation gestartet")
-        },
-        
-        destroyAnimation: () => {
-          // In der echten Implementierung würden hier three.js Ressourcen freigegeben
-          console.log("3D Röntgensimulation gestoppt")
-        }
-      }
-      
-      return simulation
-    }
-    
-    const xraySimulation = setupXRaySimulation()
-    xraySimulation.initializeAnimation()
-    setSimulation(xraySimulation)
-    
-    return () => {
-      if (xraySimulation.isActive) {
-        xraySimulation.destroyAnimation()
-      }
-    }
-  }, [])
   
   return (
     <div ref={containerRef} className={`relative w-full h-full ${className}`}>
-      {/* Fallback-Bild, falls 3D-Animation nicht unterstützt wird */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <Image
-          src="/xray-simulation-fallback.jpg"
-          alt="3D Röntgenanalyse in Bewegung"
-          fill
-          className="object-cover"
-          priority
-        />
+      {/* Modernisierter Hintergrund */}
+      <div className="absolute inset-0 rounded-2xl overflow-hidden bg-gradient-to-br from-[#0C5374] via-[#08415C] to-[#061b26] border border-[#50C9E1]/20">
         
-        {/* Overlay mit Animationseffekt */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#08415C]/70 to-transparent mix-blend-multiply"></div>
+        {/* 3D Röntgen-Visualisierung */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative">
+            {/* Zentrales Scan-Icon */}
+            <motion.div
+              animate={{ 
+                scale: [1, 1.1, 1],
+                opacity: [0.7, 1, 0.7]
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Scan size={100} className="text-[#50C9E1]" />
+            </motion.div>
+            
+            {/* Rotierende Scan-Ringe */}
+            {[...Array(3)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute border-2 border-[#50C9E1]/30 rounded-full"
+                style={{
+                  width: `${150 + i * 40}px`,
+                  height: `${150 + i * 40}px`,
+                  top: `${-75 - i * 20}px`,
+                  left: `${-75 - i * 20}px`,
+                }}
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 8 + i * 2,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              />
+            ))}
+          </div>
+        </div>
         
-        {/* Animierte Röntgenstrahlen */}
+        {/* Verbesserte animierte Scan-Linien */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute bg-[#50C9E1] h-px opacity-70"
+              className="absolute h-0.5 opacity-60"
               style={{ 
-                width: '100%',
-                top: `${20 + i * 15}%`,
-                left: '-100%'
+                width: '120%',
+                top: `${25 + i * 15}%`,
+                left: '-120%',
+                background: `linear-gradient(90deg, transparent, #50C9E1, transparent)`
               }}
               animate={{
-                left: '200%',
+                left: '120%',
               }}
               transition={{
-                duration: 3,
+                duration: 4,
                 repeat: Infinity,
-                delay: i * 0.5,
+                delay: i * 0.8,
                 ease: "easeInOut"
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Particle Effect */}
+        <div className="absolute inset-0">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-[#50C9E1] rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 1, 0]
+              }}
+              transition={{
+                duration: 2 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2
               }}
             />
           ))}
@@ -101,137 +106,229 @@ const XRay3DEffect = ({ className }: { className?: string }) => {
   )
 }
 
-export default function herosection() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
-  const scrollRef = useRef<HTMLDivElement | null>(null)
+export default function OptimizedHero() {
+  const [currentFeature, setCurrentFeature] = useState(0)
   const { scrollYProgress } = useScroll()
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
   
-  // Für Röntgen-Effekt auf Text
-  const [showXRay, setShowXRay] = useState(false)
-  
+  const features = [
+    { text: "Fehler früh erkennen, bevor sie teuer werden", icon: "🎯" },
+    { text: "Entwicklungszyklen verkürzen", icon: "⚡" },
+    { text: "Ausschuss und Reklamationen reduzieren", icon: "🔬" },
+    { text: "Fundiertere Entscheidungen im F&E-Prozess", icon: "📊" }
+  ]
+
+  const applications = [
+    "Produktentwicklung",
+    "Qualitätssicherung",
+    "Fehleranalyse",
+    "Prototypenprüfung",
+    "Serienvalidierung",
+  ]
+
+  // Animierte Features
   useEffect(() => {
-    // Toggle Röntgen-Effekt alle 5 Sekunden
     const interval = setInterval(() => {
-      setShowXRay(prev => !prev)
-    }, 5000)
-    
+      setCurrentFeature((prev) => (prev + 1) % features.length)
+    }, 3000)
     return () => clearInterval(interval)
   }, [])
-  
+
+
   const scrollToNextSection = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({
-        behavior: "smooth"
-      })
-    }
+    const nextSection = document.querySelector('#benefits')
+    nextSection?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  // Anwendungsbeispiele
-  const applications = [
-    "Qualitätskontrolle", 
-    "Bewegungsanalyse", 
-    "Fehlerdiagnose", 
-    "Produktentwicklung", 
-    "Materialprüfung"
-  ]
-  
   return (
     <>
-     <section className="relative bg-gradient-to-br from-[#08415C] to-[#05151f] text-white min-h-[90vh] overflow-hidden z-0">
-        {/* Hintergrund mit 3D-Röntgen-Effekt */}
-        <div className="absolute inset-0 opacity-25 mix-blend-screen">
-          <div className="h-full w-full bg-[url('/xray-grid-pattern.svg')] bg-repeat"></div>
+      <motion.section 
+        style={{ opacity }}
+        className="relative bg-gradient-to-br from-[#08415C] via-[#0C5374] to-[#05151f] text-white min-h-screen overflow-hidden"
+      >
+        {/* Optimierter Hintergrund */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="h-full w-full bg-[url('/grid-pattern.svg')] bg-repeat animate-pulse"></div>
         </div>
-        
-        <div className="relative z-0 container mx-auto h-[90vh] flex flex-col md:flex-row items-center">
-          {/* Text-Bereich */}
-          <motion.div 
-            className="w-full md:w-1/2 px-6 py-16 md:py-0 text-center md:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="flex items-center gap-2 mb-4 justify-center md:justify-start">
+
+        <div className="relative z-10 container mx-auto min-h-screen flex flex-col md:flex-row items-center px-6 py-16">
+          
+          {/* Verbesserter Content-Bereich */}
+          <div className="w-full md:w-1/2 text-center md:text-left">
+            
+            {/* Trust Badge */}
+            <motion.div 
+              className="flex items-center gap-2 mb-6 justify-center md:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={16} className="text-yellow-400 fill-current" />
+                ))}
+              </div>
+              <span className="text-sm text-gray-300">50+ zufriedene Industriekunden</span>
+            </motion.div>
+
+            <motion.div 
+              className="flex items-center gap-2 mb-6 justify-center md:justify-start"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               <Scan size={24} className="text-[#50C9E1]" />
-              <span className="text-sm uppercase tracking-widest font-semibold text-[#50C9E1]">Röntgentechnologie der nächsten Generation</span>
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight relative">
-              <span className={`transition-opacity duration-500 ${showXRay ? 'opacity-0' : 'opacity-100'}`}>
-                Bewegungen in 3D
+              <span className="text-sm uppercase tracking-widest font-semibold text-[#50C9E1]">
+                Industrielle CT &amp; Röntgenanalyse für die Produktentwicklung
               </span>
-              <span className={`absolute left-0 top-0 text-[#50C9E1] transition-opacity duration-500 ${showXRay ? 'opacity-100' : 'opacity-0'}`}>
-                Röntgenanalyse
+            </motion.div>
+            
+            {/* Verbesserter Haupttitel - Überlappung behoben */}
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="block">Verborgene Produktfehler</span>
+              <span className="block">
+                <span className="text-[#50C9E1]">sichtbar machen</span> –
               </span>
-              <span className="block mt-2">sichtbar machen</span>
-            </h1>
+              <span className="block text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-200 mt-1">
+                bevor sie Zeit und Geld kosten.
+              </span>
+            </motion.h1>
             
-            <p className="text-lg mb-8 max-w-xl text-gray-300 mx-auto md:mx-0">
-              Unsere innovative 3D-Röntgentechnologie erfasst Bewegungen in Echtzeit und liefert tiefe Einblicke in komplexe mechanische Systeme – auch dort, wo herkömmliche Technologien an ihre Grenzen stoßen.
-            </p>
+            {/* Verbesserter Untertitel */}
+            <motion.p
+              className="text-lg mb-8 max-w-xl text-gray-200 mx-auto md:mx-0 leading-relaxed"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Mit industrieller Röntgentechnologie und CT-Analysen unterstützt Kinemo Entwicklungs- und Qualitätsteams dabei,{" "}
+              <span className="text-[#50C9E1] font-medium">innere Strukturen, Schwachstellen und Fehler frühzeitig zu erkennen</span> – noch bevor sie Zeit und Geld kosten.
+            </motion.p>
             
-            <div className="flex flex-wrap gap-4 mb-8 justify-center md:justify-start">
+            {/* Animierte Feature-Highlights - Überlappung behoben */}
+            <motion.div 
+              className="mb-8 min-h-[3rem] flex items-center justify-center md:justify-start"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <CheckCircle size={20} className="text-[#50C9E1] mr-3 flex-shrink-0" />
+              <div className="relative min-h-[2rem] flex items-center">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentFeature}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="flex items-center gap-2"
+                  >
+                    <span className="text-2xl">{features[currentFeature].icon}</span>
+                    <span className="text-lg font-medium">{features[currentFeature].text}</span>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+            
+            {/* Verbesserte CTA Buttons */}
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+            >
+              <Link
+                href="/kontakt"
+                className="group relative inline-flex items-center bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <span className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+                <span className="relative">Jetzt Analyse anfragen</span>
+                <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                href="/anwendungsfaelle"
+                className="inline-flex items-center bg-transparent border-2 border-white/30 hover:border-[#50C9E1] hover:bg-[#50C9E1]/10 text-white px-8 py-4 rounded-full transition-all duration-300"
+              >
+                <Play size={18} className="mr-2" />
+                Anwendungsfälle ansehen
+              </Link>
+            </motion.div>
+
+            {/* Anwendungsbereiche */}
+            <motion.div 
+              className="flex flex-wrap gap-3 justify-center md:justify-start mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1 }}
+            >
               {applications.map((app, i) => (
-                <span key={i} className="px-3 py-1 rounded-full bg-white/10 text-sm font-medium">
+                <span key={i} className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-sm font-medium border border-white/20 hover:bg-white/20 transition-colors">
                   {app}
                 </span>
               ))}
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <Link
-                href="/contact"
-                className="inline-flex items-center bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-6 py-3 rounded-full transition group"
-              >
-                Demo-Termin vereinbaren
-                <ArrowRight size={18} className="ml-2 transition group-hover:translate-x-1" />
-              </Link>
-              
-              <button
-                onClick={() => setIsVideoModalOpen(true)}
-                className="inline-flex items-center bg-transparent border border-white/30 hover:border-white text-white px-6 py-3 rounded-full transition mt-4 sm:mt-0"
-              >
-                <Play size={18} className="mr-2" />
-                3D-Röntgen in Aktion
-              </button>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Social Proof */}
+            <motion.div 
+              className="flex flex-wrap items-center gap-6 justify-center md:justify-start opacity-80"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, delay: 1.2 }}
+            >
+              <span className="text-sm text-gray-300">Vertraut von Marktführern:</span>
+              <div className="flex items-center gap-4 text-sm font-medium">
+                <span className="hover:text-[#50C9E1] transition-colors">Brose</span>
+                <span className="text-gray-500">•</span>
+                <span className="hover:text-[#50C9E1] transition-colors">Vorwerk</span>
+                <span className="text-gray-500">•</span>
+                <span className="hover:text-[#50C9E1] transition-colors">Hansgrohe</span>
+                <span className="text-gray-500">•</span>
+                <span className="text-[#50C9E1]">50+ weitere</span>
+              </div>
+            </motion.div>
+          </div>
           
-          {/* 3D-Röntgen-Visualisierung */}
+          {/* Verbesserte Visualisierung */}
           <motion.div 
-            className="w-full md:w-1/2 h-[50vh] md:h-[90vh] relative"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            className="w-full md:w-1/2 h-[60vh] md:h-[80vh] relative mt-12 md:mt-0"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
             <XRay3DEffect className="w-full h-full" />
             
-            {/* Overlay mit technischen Daten */}
-            <div className="absolute bottom-12 right-12 bg-black/40 backdrop-blur-md p-4 rounded-lg border border-white/20 max-w-xs hidden md:block">
-              <div className="text-sm font-mono">
-                <div className="flex justify-between text-[#50C9E1] mb-2">
+            {/* Verbesserte Stats */}
+            <motion.div 
+              className="absolute -bottom-6 -left-6 bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <div className="text-sm font-mono space-y-2">
+                <div className="flex justify-between text-[#50C9E1] font-bold">
                   <span>AUFLÖSUNG:</span>
                   <span>4K / 60FPS</span>
                 </div>
-                <div className="flex justify-between mb-2">
-                  <span>SCAN-TIEFE:</span>
-                  <span>180mm</span>
-                </div>
-                <div className="flex justify-between mb-2">
+                <div className="flex justify-between">
                   <span>PRÄZISION:</span>
-                  <span>±0.02mm</span>
+                  <span className="text-[#50C9E1]">±0.02mm</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>DATENRATE:</span>
-                  <span>2.8 GB/s</span>
+                  <span>ANALYSEZEIT:</span>
+                  <span className="text-green-400"> 48h</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
         
-        {/* Scroll-Indikator */}
+        {/* Verbesserter Scroll-Indikator */}
         <motion.div 
           className="absolute bottom-8 left-0 right-0 flex justify-center cursor-pointer"
           animate={{ y: [0, 10, 0] }}
@@ -242,101 +339,13 @@ export default function herosection() {
           }}
           onClick={scrollToNextSection}
         >
-          <ChevronDown size={32} className="text-[#50C9E1]/80" />
+          <div className="flex flex-col items-center gap-2 group">
+            <span className="text-xs text-gray-400 group-hover:text-[#50C9E1] transition-colors">Mehr erfahren</span>
+            <ChevronDown size={24} className="text-[#50C9E1]/80 group-hover:text-[#50C9E1] transition-colors" />
+          </div>
         </motion.div>
-      </section>
-      
-      {/* Anwendungsbereiche Section */}
-      <div ref={scrollRef} className="bg-white dark:bg-[#0f2b3b] py-16">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#08415C] dark:text-white mb-4">
-              Präzise Einblicke durch 3D-Röntgentechnologie
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Unsere patentierte 3D-Röntgentechnologie revolutioniert die Bewegungsanalyse mit Echtzeit-Visualisierung und Datenerfassung für verschiedenste Anwendungen.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 dark:bg-[#061b26] p-6 rounded-lg border border-gray-100 dark:border-[#1a3a4b] text-center">
-              <div className="w-16 h-16 bg-[#08415C]/10 dark:bg-[#50C9E1]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#08415C] dark:text-[#50C9E1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-[#08415C] dark:text-[#50C9E1] mb-2">
-                Fehleranalyse in Bewegung
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Identifizieren Sie Fehler in mechanischen Systemen während des Betriebs, ohne den Prozess unterbrechen zu müssen.
-              </p>
-            </div>
-            
-            <div className="bg-gray-50 dark:bg-[#061b26] p-6 rounded-lg border border-gray-100 dark:border-[#1a3a4b] text-center">
-              <div className="w-16 h-16 bg-[#08415C]/10 dark:bg-[#50C9E1]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#08415C] dark:text-[#50C9E1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-[#08415C] dark:text-[#50C9E1] mb-2">
-                3D-Visualisierung
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Erfassen Sie komplexe Bewegungen in dreidimensionalem Raum und erhalten Sie detaillierte Einblicke in verborgene Prozesse.
-              </p>
-            </div>
-            
-            <div className="bg-gray-50 dark:bg-[#061b26] p-6 rounded-lg border border-gray-100 dark:border-[#1a3a4b] text-center">
-              <div className="w-16 h-16 bg-[#08415C]/10 dark:bg-[#50C9E1]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#08415C] dark:text-[#50C9E1]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-[#08415C] dark:text-[#50C9E1] mb-2">
-                Echtzeit-Datenerfassung
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Sammeln Sie präzise Messdaten während der Röntgenanalyse und nutzen Sie sie für sofortige Auswertungen und Entscheidungen.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* Video Modal */}
-      {isVideoModalOpen && (
-        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[9999] p-4">
-          <div className="relative bg-[#061b26] rounded-lg max-w-4xl w-full max-h-[80vh] overflow-hidden border border-[#50C9E1]/30">
-            <button
-              onClick={() => setIsVideoModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-300 hover:text-white z-10"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            
-            <div className="aspect-video">
-              {/* Hier würde ein echtes Video eingebettet */}
-              <div className="w-full h-full bg-gray-900 flex items-center justify-center">
-                <p className="text-white text-center p-8">
-                  [Video: "3D-Röntgentechnologie in Bewegung - Tiefe Einblicke in komplexe mechanische Systeme"]
-                </p>
-              </div>
-            </div>
-            
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-[#50C9E1] mb-2">
-                3D-Röntgenanalyse im Einsatz
-              </h3>
-              <p className="text-gray-300">
-                Sehen Sie, wie unsere patentierte Technologie komplexe Bewegungen in Echtzeit erfasst und visualisiert - für beispiellose Einblicke in Ihre technischen Systeme.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      </motion.section>
+
     </>
   )
 }

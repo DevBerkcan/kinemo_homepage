@@ -18,7 +18,7 @@ const testimonials = [
     name: "Martin Schubert",
     role: "Leitung Technik, Hansgrohe",
     quote:
-      "Die Röntgenanalyse hat uns geholfen, Strömungsverläufe in Echtzeit zu verstehen – ein echter Gamechanger.",
+      "Die CT-Analyse hat uns geholfen, innere Strukturfehler frühzeitig zu identifizieren – ein echter Gamechanger für unsere Qualitätssicherung.",
     image: "/testimonials/martin.jpg",
   },
   {
@@ -32,7 +32,7 @@ const testimonials = [
     name: "Christian Prellwitz",
     role: "Abteilungsleiter Test & Vorentwicklung",
     quote:
-      "Durch die Videos war es möglich, das Verhalten der Produkte im realen Beanspruchungszustand zu prüfen und Rückschlüsse auf potenzielle Probleme zu ermitteln. Als Ergebnis konnten wir unsere Produkte robuster auslegen und Reklamationen vermeiden, was im Endeffekt zu signifikanten Kosteneinsparungen geführt hat.",
+      "Durch die CT-Analyse war es möglich, das Verhalten der Bauteile unter Belastung zu verstehen und Rückschlüsse auf potenzielle Probleme zu ermitteln. Als Ergebnis konnten wir unsere Produkte robuster auslegen und Reklamationen vermeiden, was im Endeffekt zu signifikanten Kosteneinsparungen geführt hat.",
     image: "/testimonials/christian.jpg",
     company: "ABUS",
     logo: "/logos/abus.png"
@@ -50,7 +50,7 @@ const testimonials = [
     name: "Michael Ußfeller",
     role: "Manager Project Development",
     quote:
-      "In der bewegten Videoanalyse entstanden wertvolle Informationen die wir innerhalb kurzer Zeit verfügbar hatten. Es wurden uns so Optimierungspotentiale aufgezeigt, die wir mit keinem anderen Verfahren hätten erfahren können.",
+      "Durch die CT-Analyse entstanden wertvolle Erkenntnisse, die wir innerhalb kurzer Zeit verfügbar hatten. Es wurden uns Optimierungspotenziale aufgezeigt, die wir mit keinem anderen Verfahren hätten erfahren können.",
     image: "/testimonials/michael.jpg",
     company: "brose",
     logo: "/logos/brose.png"
@@ -59,32 +59,32 @@ const testimonials = [
 
 const caseStudies = [
   {
-    title: "Optimierung eines Wasserfilters bei Hansgrohe",
+    title: "Strukturanalyse eines Filtergehäuses bei Hansgrohe",
     summary:
-      "Kinemo analysierte die Partikelbewegung im Filtergehäuse und half bei der Optimierung der Strömungsgeometrie.",
+      "Kinemo analysierte die innere Geometrie und Wandstärkenverteilung im Filtergehäuse und unterstützte die Optimierung der Konstruktion.",
     slug: "hansgrohe-wasserfilter",
     details:
-      "Vorher-Nachher-Analyse zeigte 30% bessere Partikelverteilung und reduzierte Verstopfungsrisiken.",
+      "CT-Analyse zeigte Wandstärkenabweichungen und Einschlüsse, die zur gezielten Anpassung der Gusskonstruktion führten.",
     imageBefore: "/cases/hansgrohe-before.jpg",
     imageAfter: "/cases/hansgrohe-after.jpg",
   },
   {
     title: "Prototypenprüfung bei Vorwerk-Küchengeräten",
     summary:
-      "Frühzeitige Entdeckung mechanischer Schwachstellen dank Röntgenbeobachtung bewegter Teile in Echtzeit.",
+      "Frühzeitige Entdeckung innerer Schwachstellen dank CT-Analyse von Entwicklungsprototypen – noch vor der Serienfreigabe.",
     slug: "vorwerk-prototypen",
     details:
-      "Die Modalanalyse mit Röntgen führte zu gezielten Design-Anpassungen an beweglichen Komponenten.",
+      "Die CT-Analyse identifizierte Bindenähte und Porositäten, die zu gezielten Konstruktionsanpassungen führten.",
     imageBefore: "/cases/vorwerk-before.jpg",
     imageAfter: "/cases/vorwerk-after.jpg",
   },
   {
     title: "Implantatprüfung in der Medizintechnik",
     summary:
-      "Live-Analyse von Gelenkbewegungen zur Optimierung von Hüftimplantaten – direkt in der Entwicklungsphase.",
+      "CT-gestützte Analyse von Implantatstrukturen zur Optimierung von Hüftimplantaten – direkt in der Entwicklungsphase.",
     slug: "implantat-medizintechnik",
     details:
-      "Ermöglichte die Simulation echter Belastungsszenarien, um Materialversagen zu minimieren.",
+      "Ermöglichte die Identifikation innerer Materialfehler und Toleranzabweichungen, um Materialversagen frühzeitig zu minimieren.",
     imageBefore: "/cases/implantat-before.jpg",
     imageAfter: "/cases/implantat-after.jpg",
   },

@@ -8,41 +8,16 @@ import { Menu, X, Moon, Sun, Phone, ChevronDown, ArrowUp } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useRouter } from "next/navigation"
 
-const menu = [
-  { title: "Startseite", path: "/" },
-  { title: "Über uns", path: "/about" },
-  {
-    title: "Dienstleistungen",
-    path: "/services",
-    children: [
-      { title: "Röntgen in Bewegung", path: "/services/x-ray-in-motion" },
-      { title: "Dynamische CT", path: "/services/dynamic-ct" },
-      { title: "Hypothesen belegen", path: "/services/validate-hypotheses" },
-      { title: "Fehleranalyse", path: "/services/error-analysis" },
-    ],
-  },
-  {
-    title: "Branchenlösungen",
-    path: "/solutions",
-    children: [
-      { title: "Automobilindustrie", path: "/solutions/automotive" },
-      { title: "Luft- und Raumfahrt", path: "/solutions/aerospace" },
-      { title: "Maschinenbau", path: "/solutions/mechanical-engineering" },
-    ],
-  },
-  { title: "Fallstudien", path: "/case-studies" },
-  { title: "Blog & News", path: "/blog" },
-  {
-    title: "Ressourcen",
-    path: "/resources",
-    children: [
-      { title: "Whitepapers", path: "/resources/whitepapers" },
-      { title: "Webinare", path: "/resources/webinars" },
-      { title: "Downloads", path: "/resources/downloads" },
-    ],
-  },
-  { title: "Kontakt", path: "/contact" },
-  { title: "FAQ", path: "/faq" },
+type MenuItem = { title: string; path: string; children?: { title: string; path: string }[] }
+
+const menu: MenuItem[] = [
+  { title: "Leistungen", path: "/leistungen" },
+  { title: "Branchen", path: "/branchen" },
+  { title: "Anwendungsfälle", path: "/anwendungsfaelle" },
+  { title: "Technologie", path: "/technologie" },
+  { title: "Referenzen", path: "/referenzen" },
+  { title: "Blog & Wissen", path: "/blog" },
+  { title: "Kontakt", path: "/kontakt" },
 ]
 
 export default function Navbar() {
@@ -184,10 +159,10 @@ export default function Navbar() {
               </a>
 
               <Link
-                href="/contact"
+                href="/kontakt"
                 className="bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-4 py-2 rounded-md text-sm transition-colors"
               >
-                Jetzt Termin vereinbaren
+                Jetzt Analyse anfragen
               </Link>
             </div>
 
@@ -332,11 +307,11 @@ export default function Navbar() {
                 </div>
                 
                 <Link
-                  href="/contact"
+                  href="/kontakt"
                   className="block bg-[#50C9E1] text-center text-[#08415C] font-semibold px-4 py-2 rounded-md"
                   onClick={() => setIsOpen(false)}
                 >
-                  Jetzt Termin vereinbaren
+                  Jetzt Analyse anfragen
                 </Link>
                 
                 <a

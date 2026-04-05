@@ -17,17 +17,19 @@ export default function CallToActionSection() {
         viewport={{ once: true }}
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Ihre Produkte verdienen <span className="text-[#50C9E1]">maximale Präzision</span>
+          Lassen Sie verborgene Risiken{" "}
+          <span className="text-[#50C9E1]">sichtbar machen.</span>
         </h2>
         <p className="text-lg text-gray-200 mb-10 max-w-2xl mx-auto">
-          Vereinbaren Sie eine kostenlose Demo und sehen Sie, wie unsere 3D-Röntgentechnologie frühzeitig Fehler erkennt und Ihre Entwicklung beschleunigt.
+          Sprechen Sie uns an – unverbindlich und unkompliziert. Wir klären gemeinsam,
+          wie Kinemo Ihren Entwicklungsprozess unterstützen kann.
         </p>
 
         <Link
-          href="/contact"
+          href="/kontakt"
           className="inline-flex items-center bg-[#50C9E1] hover:bg-[#7ddbf3] text-[#08415C] font-semibold px-8 py-4 rounded-full shadow-lg transition"
         >
-          Jetzt Demo vereinbaren
+          Jetzt unverbindlich anfragen
           <ArrowRight className="ml-3" size={18} />
         </Link>
       </motion.div>

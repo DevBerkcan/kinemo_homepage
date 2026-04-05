@@ -1,0 +1,256 @@
+"use client"
+
+import Navbar from "@components/navigationsbar"
+import Footer from "@components/Footer"
+import { useState } from "react"
+import { Phone, Mail, Clock, CheckCircle, CalendarCheck } from "lucide-react"
+
+const trustItems = [
+  { icon: Clock, text: "Antwort in der Regel innerhalb von 24h" },
+  { icon: CheckCircle, text: "Kostenlos & unverbindlich" },
+  { icon: CalendarCheck, text: "Flexibel – per Telefon, Video oder vor Ort" },
+]
+
+export default function TerminBuchenPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    preferredDate: "",
+    message: "",
+    privacy: false,
+  })
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+    }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      setSubmitted(true)
+    }, 1200)
+  }
+
+  return (
+    <>
+      <Navbar />
+      <main className="bg-white dark:bg-[#061b26] text-gray-900 dark:text-white">
+        {/* Hero */}
+        <section className="bg-gradient-to-br from-[#08415C] to-[#061b26] text-white py-20 px-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-[#50C9E1]/10 text-[#50C9E1] px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <CalendarCheck size={16} />
+              Termin buchen
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Erstgespräch vereinbaren
+            </h1>
+            <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+              Beschreiben Sie kurz Ihr Anliegen – wir melden uns zeitnah und klären gemeinsam,
+              wie Kinemo Ihnen weiterhelfen kann.
+            </p>
+          </div>
+        </section>
+
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left: Trust + contact info */}
+            <div>
+              <h2 className="text-2xl font-bold text-[#08415C] dark:text-white mb-6">
+                Was Sie erwartet
+              </h2>
+              <div className="space-y-4 mb-10">
+                {trustItems.map((item, i) => {
+                  const Icon = item.icon
+                  return (
+                    <div key={i} className="flex items-center gap-4 bg-gray-50 dark:bg-[#0f2b3b] rounded-xl px-5 py-4 border border-gray-200 dark:border-gray-700">
+                      <Icon size={20} className="text-[#50C9E1] flex-shrink-0" />
+                      <span className="text-gray-700 dark:text-gray-300">{item.text}</span>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <h3 className="text-lg font-semibold text-[#08415C] dark:text-white mb-4">Direkter Kontakt</h3>
+              <div className="space-y-3">
+                <a
+                  href="tel:+49123456789"
+                  className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-[#50C9E1] transition-colors"
+                >
+                  <Phone size={18} className="text-[#50C9E1]" />
+                  +49 123 456789
+                </a>
+                <a
+                  href="mailto:info@kinemo.de"
+                  className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-[#50C9E1] transition-colors"
+                >
+                  <Mail size={18} className="text-[#50C9E1]" />
+                  info@kinemo.de
+                </a>
+              </div>
+
+              <div className="mt-10 p-6 bg-[#08415C]/5 dark:bg-[#50C9E1]/5 border border-[#08415C]/10 dark:border-[#50C9E1]/10 rounded-2xl">
+                <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Im Erstgespräch klären wir: Welches Bauteil soll analysiert werden?
+                  Welche Fragestellung steht im Vordergrund? Welches Verfahren ist am geeignetsten?
+                  Sie erhalten danach ein konkretes Angebot.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: Form */}
+            <div className="bg-gray-50 dark:bg-[#0f2b3b] rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-sm">
+              {submitted ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle size={32} className="text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#08415C] dark:text-white mb-3">
+                    Anfrage erhalten!
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    Wir melden uns in der Regel innerhalb von 24 Stunden bei Ihnen.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <h3 className="text-xl font-bold text-[#08415C] dark:text-white mb-6">
+                    Termin anfragen
+                  </h3>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                        placeholder="Max Mustermann"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Unternehmen
+                      </label>
+                      <input
+                        type="text"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                        placeholder="Muster GmbH"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        E-Mail <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                        placeholder="max@muster.de"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        Telefon
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                        placeholder="+49 ..."
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Gewünschter Termin / Zeitraum
+                    </label>
+                    <input
+                      type="text"
+                      name="preferredDate"
+                      value={formData.preferredDate}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition"
+                      placeholder="z. B. KW 18, nächste Woche, morgens..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Ihr Anliegen <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      name="message"
+                      required
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#061b26] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#50C9E1] transition resize-none"
+                      placeholder="Welches Bauteil soll geprüft werden? Was ist Ihre Fragestellung?"
+                    />
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <input
+                      type="checkbox"
+                      name="privacy"
+                      id="privacy"
+                      required
+                      checked={formData.privacy}
+                      onChange={handleChange}
+                      className="mt-1 accent-[#50C9E1]"
+                    />
+                    <label htmlFor="privacy" className="text-sm text-gray-600 dark:text-gray-400">
+                      Ich habe die{" "}
+                      <a href="/datenschutz" className="text-[#50C9E1] hover:underline">
+                        Datenschutzerklärung
+                      </a>{" "}
+                      gelesen und stimme der Verarbeitung meiner Daten zu.{" "}
+                      <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-[#50C9E1] hover:bg-[#7DDBF3] disabled:opacity-60 text-[#08415C] font-semibold px-8 py-4 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg"
+                  >
+                    {loading ? "Wird gesendet..." : "Termin anfragen"}
+                  </button>
+                </form>
+              )}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}

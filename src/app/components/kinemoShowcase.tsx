@@ -13,7 +13,7 @@ export default function KinemoShowcase() {
           Röntgenanalyse im Vergleich
         </h2>
         <p className="text-gray-600 dark:text-gray-300">
-          Bewegen Sie den Regler und vergleichen Sie die visuelle Darstellung mit und ohne Kinemo-3D-Röntgentechnologie.
+          Bewegen Sie den Regler und sehen Sie, was industrielle CT-Analyse im Bauteilinneren sichtbar macht.
         </p>
       </div>
 
