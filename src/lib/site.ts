@@ -1,0 +1,10 @@
+export const COMPANY_NAME = "Kinemo GmbH"
+export const COMPANY_BRAND = "Kinemo"
+export const COMPANY_PHONE = "+49 1520 576 5010"
+export const COMPANY_PHONE_HREF = "tel:+4915205765010"
+export const COMPANY_EMAIL = "contact@kinemo.de"
+export const COMPANY_EMAIL_HREF = "mailto:contact@kinemo.de"
+export const COMPANY_ADDRESS_LINE_1 = "Heinz-Fangman-Str. 2"
+export const COMPANY_CITY = "42287 Wuppertal"
+export const COMPANY_COUNTRY = "Deutschland"
+export const COMPANY_ADDRESS_FULL = `${COMPANY_ADDRESS_LINE_1}, ${COMPANY_CITY}`

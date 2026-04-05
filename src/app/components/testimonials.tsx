@@ -106,9 +106,9 @@ export default function TestimonialsAndCases() {
         <p className="text-gray-600 dark:text-gray-300">
           Wie Kinemo Unternehmen dabei unterstützt, bessere Produkte schneller auf den Markt zu bringen.
         </p>
-        <div className="mt-6 flex justify-center gap-4">
+        <div className="mt-6 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <button
-            className={`px-6 py-2 text-sm font-semibold rounded-full transition ${
+            className={`w-full sm:w-auto px-6 py-2 text-sm font-semibold rounded-full transition ${
               activeTab === "testimonials"
                 ? "bg-[#50C9E1] text-[#08415C]"
                 : "bg-white dark:bg-[#1a3a4b] text-gray-600 dark:text-white border"
@@ -118,7 +118,7 @@ export default function TestimonialsAndCases() {
             Testimonials
           </button>
           <button
-            className={`px-6 py-2 text-sm font-semibold rounded-full transition ${
+            className={`w-full sm:w-auto px-6 py-2 text-sm font-semibold rounded-full transition ${
               activeTab === "cases"
                 ? "bg-[#50C9E1] text-[#08415C]"
                 : "bg-white dark:bg-[#1a3a4b] text-gray-600 dark:text-white border"
@@ -197,7 +197,7 @@ export default function TestimonialsAndCases() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white dark:bg-[#0f2b3b] rounded-xl p-6 max-w-3xl w-full text-left relative"
+              className="bg-white dark:bg-[#0f2b3b] rounded-xl p-5 sm:p-6 max-w-3xl w-full max-h-[85vh] overflow-y-auto text-left relative"
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}

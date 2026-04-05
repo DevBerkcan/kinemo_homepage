@@ -34,7 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-[#50C9E1] focus:px-4 focus:py-2 focus:text-[#08415C] focus:shadow-lg"
+        >
+          Zum Inhalt springen
+        </a>
+        <div id="main-content">{children}</div>
+      </body>
     </html>
   );
 }

@@ -6,6 +6,7 @@ import Navbar from "@components/navigationsbar"
 import Footer from "@components/Footer"
 import { Phone, Mail, MapPin, Clock, CheckCircle } from "lucide-react"
 import { createBreadcrumbJsonLd, organizationJsonLd } from "@/lib/seo"
+import { COMPANY_ADDRESS_FULL, COMPANY_EMAIL, COMPANY_EMAIL_HREF, COMPANY_PHONE, COMPANY_PHONE_HREF } from "@/lib/site"
 
 export default function KontaktPage() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", company: "", message: "", privacy: false })
@@ -113,9 +114,9 @@ export default function KontaktPage() {
 
               <div className="space-y-4 mb-10">
                 {[
-                  { icon: Phone, label: "Telefon", value: "+49 1520 576 5010", href: "tel:+4915205765010" },
-                  { icon: Mail, label: "E-Mail", value: "contact@kinemo.de", href: "mailto:contact@kinemo.de" },
-                  { icon: MapPin, label: "Labor", value: "Talstraße 71, 42551 Velbert" },
+                  { icon: Phone, label: "Telefon", value: COMPANY_PHONE, href: COMPANY_PHONE_HREF },
+                  { icon: Mail, label: "E-Mail", value: COMPANY_EMAIL, href: COMPANY_EMAIL_HREF },
+                  { icon: MapPin, label: "Labor", value: COMPANY_ADDRESS_FULL },
                   { icon: Clock, label: "Antwortzeit", value: "In der Regel innerhalb von 24h" },
                 ].map((item, i) => {
                   const Icon = item.icon

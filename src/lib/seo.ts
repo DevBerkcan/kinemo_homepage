@@ -1,7 +1,13 @@
 import type { Metadata } from "next"
+import {
+  COMPANY_ADDRESS_LINE_1,
+  COMPANY_BRAND,
+  COMPANY_EMAIL,
+  COMPANY_PHONE,
+} from "@/lib/site"
 
 export const SITE_URL = "https://www.kinemo.de"
-export const BRAND_NAME = "Kinemo"
+export const BRAND_NAME = COMPANY_BRAND
 export const DEFAULT_OG_IMAGE = "/og-image-xray.jpg"
 
 export const DEFAULT_KEYWORDS = [
@@ -113,11 +119,11 @@ export const organizationJsonLd = {
   name: BRAND_NAME,
   url: SITE_URL,
   logo: absoluteUrl("/favicon.ico"),
-  email: "contact@kinemo.de",
-  telephone: "+49 1520 5765010",
+  email: COMPANY_EMAIL,
+  telephone: COMPANY_PHONE,
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Heinz-Fangman-Str. 2",
+    streetAddress: COMPANY_ADDRESS_LINE_1,
     postalCode: "42287",
     addressLocality: "Wuppertal",
     addressCountry: "DE",

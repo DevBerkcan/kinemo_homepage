@@ -151,14 +151,14 @@ export default function OptimizedHero() {
           <div className="h-full w-full bg-[url('/grid-pattern.svg')] bg-repeat animate-pulse"></div>
         </div>
 
-        <div className="relative z-10 container mx-auto min-h-screen flex flex-col md:flex-row items-center px-6 py-16">
+        <div className="relative z-10 container mx-auto min-h-screen flex flex-col md:flex-row items-center px-5 sm:px-6 py-14 md:py-16">
           
           {/* Verbesserter Content-Bereich */}
           <div className="w-full md:w-1/2 text-center md:text-left">
             
             {/* Trust Badge */}
             <motion.div 
-              className="flex items-center gap-2 mb-6 justify-center md:justify-start"
+              className="flex flex-wrap items-center gap-2 mb-6 justify-center md:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -172,7 +172,7 @@ export default function OptimizedHero() {
             </motion.div>
 
             <motion.div 
-              className="flex items-center gap-2 mb-6 justify-center md:justify-start"
+              className="flex flex-wrap items-center gap-2 mb-6 justify-center md:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
@@ -185,7 +185,7 @@ export default function OptimizedHero() {
             
             {/* Verbesserter Haupttitel - Überlappung behoben */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight break-words"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
@@ -201,7 +201,7 @@ export default function OptimizedHero() {
             
             {/* Verbesserter Untertitel */}
             <motion.p
-              className="text-lg mb-8 max-w-xl text-gray-200 mx-auto md:mx-0 leading-relaxed"
+              className="text-base sm:text-lg mb-8 max-w-xl text-gray-200 mx-auto md:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -226,10 +226,10 @@ export default function OptimizedHero() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.4 }}
-                    className="flex items-center gap-2"
+                    className="flex max-w-full items-center gap-2 text-left"
                   >
-                    <span className="text-2xl">{features[currentFeature].icon}</span>
-                    <span className="text-lg font-medium">{features[currentFeature].text}</span>
+                    <span className="text-2xl shrink-0">{features[currentFeature].icon}</span>
+                    <span className="text-base sm:text-lg font-medium break-words">{features[currentFeature].text}</span>
                   </motion.div>
                 </AnimatePresence>
               </div>
@@ -296,7 +296,7 @@ export default function OptimizedHero() {
           
           {/* Verbesserte Visualisierung */}
           <motion.div 
-            className="w-full md:w-1/2 h-[60vh] md:h-[80vh] relative mt-12 md:mt-0"
+            className="w-full md:w-1/2 h-[50vh] sm:h-[60vh] md:h-[80vh] relative mt-12 md:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
@@ -305,12 +305,12 @@ export default function OptimizedHero() {
             
             {/* Verbesserte Stats */}
             <motion.div 
-              className="absolute -bottom-6 -left-6 bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-xl"
+              className="absolute bottom-4 left-4 right-4 md:right-auto md:-bottom-6 md:-left-6 bg-white/10 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-2xl border border-white/20 shadow-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
             >
-              <div className="text-sm font-mono space-y-2">
+              <div className="text-xs sm:text-sm font-mono space-y-2">
                 <div className="flex justify-between text-[#50C9E1] font-bold">
                   <span>AUFLÖSUNG:</span>
                   <span>4K / 60FPS</span>

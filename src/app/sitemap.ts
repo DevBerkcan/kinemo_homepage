@@ -24,6 +24,10 @@ const staticRoutes: Array<{
   { path: "/termin-buchen", priority: 0.8, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.75, changeFrequency: "weekly" },
   { path: "/HowItWorks", priority: 0.65, changeFrequency: "monthly" },
+  { path: "/ct-aluminiumguss", priority: 0.84, changeFrequency: "monthly" },
+  { path: "/bga-loetstellenpruefung", priority: 0.84, changeFrequency: "monthly" },
+  { path: "/porositaetsanalyse", priority: 0.84, changeFrequency: "monthly" },
+  { path: "/erstmusterpruefung-ct", priority: 0.84, changeFrequency: "monthly" },
 ]
 
 export default function sitemap(): MetadataRoute.Sitemap {

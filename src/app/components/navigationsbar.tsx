@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Menu, X, Moon, Sun, Phone, ChevronDown, ArrowUp } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useRouter } from "next/navigation"
+import { COMPANY_PHONE, COMPANY_PHONE_HREF } from "@/lib/site"
 
 type MenuItem = { title: string; path: string; children?: { title: string; path: string }[] }
 
@@ -24,7 +24,6 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
-  const router = useRouter()
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [expandedItems, setExpandedItems] = useState<number[]>([])
 
@@ -87,11 +86,6 @@ export default function Navbar() {
     localStorage.setItem('darkMode', String(newDarkMode))
   }
 
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const locale = e.target.value
-    router.push(`${locale}${pathname}`)
-  }
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -105,12 +99,6 @@ export default function Navbar() {
         ? prev.filter(item => item !== index)
         : [...prev, index]
     )
-  }
-
-  // Aktuelle Sprache aus dem Pathname extrahieren
-  const getCurrentLanguage = () => {
-    if (pathname.startsWith('/en')) return '/en'
-    return '/de'  // Standardsprache
   }
 
   return (
@@ -140,22 +128,12 @@ export default function Navbar() {
                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
 
-              <select
-                onChange={handleLanguageChange}
-                className="bg-transparent border border-[#08415C]/30 dark:border-white/20 rounded px-2 py-1 text-sm text-[#08415C] dark:text-white cursor-pointer transition-colors"
-                defaultValue={getCurrentLanguage()}
-                aria-label="Sprache wählen"
-              >
-                <option value="/de">DE</option>
-                <option value="/en">EN</option>
-              </select>
-
               <a
-                href="tel:+49123456789"
+                href={COMPANY_PHONE_HREF}
                 className="flex items-center gap-2 border px-3 py-1 rounded-md text-sm hover:bg-[#50C9E1]/10 text-[#08415C] dark:text-white transition-colors"
                 aria-label="Anrufen"
               >
-                <Phone size={16} /> +49 123 456789
+                <Phone size={16} /> {COMPANY_PHONE}
               </a>
 
               <Link
@@ -285,25 +263,16 @@ export default function Navbar() {
 
               {/* Mobile Extra Actions */}
               <div className="mt-6 space-y-4">
-                <div className="flex gap-4 items-center justify-between mb-4">
+                <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 sm:items-center sm:justify-between mb-4">
                   <button 
                     onClick={toggleDarkMode} 
-                    className="flex items-center gap-2 text-[#08415C] dark:text-white border border-[#08415C]/30 dark:border-white/20 px-3 py-2 rounded-md"
+                    className="flex w-full sm:w-auto items-center justify-center gap-2 text-[#08415C] dark:text-white border border-[#08415C]/30 dark:border-white/20 px-3 py-2 rounded-md"
                     aria-label={darkMode ? "Zu hellem Modus wechseln" : "Zu dunklem Modus wechseln"}
                   >
                     {darkMode ? <Sun size={16} /> : <Moon size={16} />}
                     <span className="text-sm">{darkMode ? "Heller Modus" : "Dunkler Modus"}</span>
                   </button>
                   
-                  <select
-                    onChange={handleLanguageChange}
-                    className="bg-transparent border border-[#08415C]/30 dark:border-white/20 rounded px-2 py-2 text-sm text-[#08415C] dark:text-white"
-                    defaultValue={getCurrentLanguage()}
-                    aria-label="Sprache wählen"
-                  >
-                    <option value="/de">Deutsch</option>
-                    <option value="/en">English</option>
-                  </select>
                 </div>
                 
                 <Link
@@ -315,10 +284,10 @@ export default function Navbar() {
                 </Link>
                 
                 <a
-                  href="tel:+49123456789"
+                  href={COMPANY_PHONE_HREF}
                   className="flex items-center justify-center gap-2 border px-4 py-2 rounded-md text-sm text-[#08415C] dark:text-white"
                 >
-                  <Phone size={16} /> +49 123 456789
+                  <Phone size={16} /> {COMPANY_PHONE}
                 </a>
               </div>
             </motion.nav>
@@ -333,7 +302,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="fixed bottom-6 right-6 z-50 bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] p-2 rounded-full shadow-lg"
+            className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] p-2 rounded-full shadow-lg"
             onClick={scrollToTop}
             aria-label="Nach oben scrollen"
           >

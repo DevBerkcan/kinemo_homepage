@@ -5,6 +5,7 @@ import Footer from "@components/Footer"
 import { useState } from "react"
 import { Phone, Mail, Clock, CheckCircle, CalendarCheck } from "lucide-react"
 import { createBreadcrumbJsonLd } from "@/lib/seo"
+import { COMPANY_EMAIL, COMPANY_EMAIL_HREF, COMPANY_PHONE, COMPANY_PHONE_HREF } from "@/lib/site"
 
 const trustItems = [
   { icon: Clock, text: "Antwort in der Regel innerhalb von 24h" },
@@ -94,18 +95,18 @@ export default function TerminBuchenPage() {
               <h3 className="text-lg font-semibold text-[#08415C] dark:text-white mb-4">Direkter Kontakt</h3>
               <div className="space-y-3">
                 <a
-                  href="tel:+49123456789"
+                  href={COMPANY_PHONE_HREF}
                   className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-[#50C9E1] transition-colors"
                 >
                   <Phone size={18} className="text-[#50C9E1]" />
-                  +49 123 456789
+                  {COMPANY_PHONE}
                 </a>
                 <a
-                  href="mailto:info@kinemo.de"
+                  href={COMPANY_EMAIL_HREF}
                   className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:text-[#50C9E1] transition-colors"
                 >
                   <Mail size={18} className="text-[#50C9E1]" />
-                  info@kinemo.de
+                  {COMPANY_EMAIL}
                 </a>
               </div>
 

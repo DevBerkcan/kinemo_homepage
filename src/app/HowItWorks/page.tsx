@@ -15,18 +15,18 @@ export default function HowItWorks() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <section className="bg-white dark:bg-[#0f2b3b] py-24 px-4 relative">
-        <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
+      <section className="bg-white dark:bg-[#0f2b3b] py-20 md:py-24 px-4 relative pb-32 md:pb-24">
+        <div className="fixed bottom-4 right-4 z-40 sm:bottom-5 sm:right-5 md:bottom-6 md:right-6">
           <Link
             href="/kontakt"
-            className="bg-gradient-to-r from-[#50C9E1] to-[#84E3F5] text-[#08415C] font-semibold px-5 py-3 rounded-full shadow-xl hover:scale-105 transition text-sm md:text-base"
+            className="inline-flex max-w-[calc(100vw-2rem)] items-center justify-center bg-gradient-to-r from-[#50C9E1] to-[#84E3F5] text-[#08415C] font-semibold px-4 py-3 sm:px-5 rounded-full shadow-xl hover:scale-105 transition text-xs sm:text-sm md:text-base text-center leading-tight"
           >
             ✨ Jetzt kostenlos beraten lassen
           </Link>
         </div>
 
-        <div className="max-w-6xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#08415C] dark:text-white mb-4">
+        <div className="max-w-6xl mx-auto text-center mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold text-[#08415C] dark:text-white mb-4">
             Wie Kinemo Ihre Produktentwicklung unterstützt
           </h2>
           <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
@@ -48,7 +48,7 @@ export default function HowItWorks() {
           <h3 className="text-xl font-bold text-[#08415C] dark:text-white mb-6 text-center">
             Ablauf der Zusammenarbeit
           </h3>
-          <ol className="space-y-6 list-decimal list-inside text-gray-700 dark:text-gray-300 text-sm md:text-base">
+          <ol className="space-y-6 pl-5 list-decimal text-gray-700 dark:text-gray-300 text-sm md:text-base">
             <li><strong>📞 Erstgespräch & Zieldefinition:</strong> Wir besprechen Ihre Anforderungen und definieren gemeinsam die Analyseziele.</li>
             <li><strong>📦 Bauteilanlieferung:</strong> Sie senden uns das Bauteil oder Produkt zur Untersuchung.</li>
             <li><strong>🔬 CT- & Röntgenanalyse:</strong> Industrielle CT macht innere Strukturen, Fehler und Maßabweichungen sichtbar, zerstörungsfrei.</li>
@@ -60,19 +60,19 @@ export default function HowItWorks() {
             <Link
               href="/downloads/Kinemo-Analyse-Beispiel.pdf"
               target="_blank"
-              className="inline-block px-6 py-3 bg-white dark:bg-[#0f2b3b] border border-[#50C9E1] text-[#08415C] dark:text-[#50C9E1] rounded-full shadow hover:bg-[#f3fdff] dark:hover:bg-[#193c4d] transition"
+              className="inline-flex max-w-full items-center justify-center px-5 py-3 md:px-6 bg-white dark:bg-[#0f2b3b] border border-[#50C9E1] text-[#08415C] dark:text-[#50C9E1] rounded-full shadow hover:bg-[#f3fdff] dark:hover:bg-[#193c4d] transition text-center text-sm md:text-base"
             >
               📄 Beispiel-Auswertung als PDF ansehen
             </Link>
           </div>
         </div>
 
-        <div className="mt-24 bg-[#08415C] text-white py-12 px-6 rounded-xl max-w-5xl mx-auto text-center">
+        <div className="mt-20 md:mt-24 bg-[#08415C] text-white py-10 md:py-12 px-5 md:px-6 rounded-xl max-w-5xl mx-auto text-center">
           <h3 className="text-2xl font-bold mb-4">Bereit für die nächste Entwicklungsstufe?</h3>
           <p className="mb-6 text-white/90 text-sm md:text-base">Über 50+ Unternehmen aus Industrie & Medizintechnik setzen bereits auf Kinemo. Fordern Sie jetzt eine unverbindliche Analyse an und entdecken Sie, was in Ihrem Produkt steckt.</p>
           <Link
             href="/kontakt"
-            className="bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-8 py-3 rounded-full transition"
+            className="inline-flex max-w-full items-center justify-center bg-[#50C9E1] hover:bg-[#7DDBF3] text-[#08415C] font-semibold px-6 md:px-8 py-3 rounded-full transition text-center"
           >
             🚀 Jetzt Demo anfordern
           </Link>

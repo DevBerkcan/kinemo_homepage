@@ -11,6 +11,7 @@ const services = [
     subtitle: "Industrielle Computertomographie",
     description: "Dreidimensionale Darstellung innerer Strukturen – für Bauteile und Baugruppen jeder Komplexität.",
     color: "from-[#08415C] to-[#0C5374]",
+    href: "/ct-aluminiumguss",
   },
   {
     icon: Radio,
@@ -18,6 +19,7 @@ const services = [
     subtitle: "2D-Röntgenanalyse",
     description: "Schnelle, präzise 2D-Durchleuchtung zur Erkennung von Fehlern, Fremdkörpern und Strukturdefekten.",
     color: "from-blue-600 to-cyan-600",
+    href: "/bga-loetstellenpruefung",
   },
   {
     icon: SearchX,
@@ -25,6 +27,7 @@ const services = [
     subtitle: "Schaden- & Ursachenanalyse",
     description: "Systematische Analyse von Schäden, Brüchen und Materialfehlern mit Dokumentation der Ursache.",
     color: "from-orange-500 to-red-500",
+    href: "/porositaetsanalyse",
   },
   {
     icon: FlaskConical,
@@ -32,6 +35,7 @@ const services = [
     subtitle: "Prüfungen in F&E-Phasen",
     description: "Von der ersten Idee bis zur Serienreife – Kinemo begleitet Ihren Entwicklungsprozess mit Analysedaten.",
     color: "from-green-500 to-emerald-600",
+    href: "/erstmusterpruefung-ct",
   },
   {
     icon: GitCompare,
@@ -90,7 +94,12 @@ export default function ServicesPreview() {
                 </div>
                 <h3 className="text-xl font-bold text-[#08415C] dark:text-white mb-1">{service.title}</h3>
                 <p className="text-[#50C9E1] text-sm font-medium mb-3">{service.subtitle}</p>
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{service.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">{service.description}</p>
+                {service.href ? (
+                  <Link href={service.href} className="text-sm font-semibold text-[#50C9E1] hover:underline">
+                    Vertiefende Seite ansehen
+                  </Link>
+                ) : null}
               </motion.div>
             )
           })}

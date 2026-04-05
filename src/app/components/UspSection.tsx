@@ -138,7 +138,7 @@ return (
                 <motion.div
                   key={index}
                   className={`group relative cursor-pointer transition-all duration-500 ${
-                    activeUSP === index ? "scale-105" : "hover:scale-[1.02]"
+                    activeUSP === index ? "md:scale-105" : "hover:md:scale-[1.02]"
                   }`}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -290,7 +290,7 @@ return (
             onClick={() => setShowModal(false)}
           >
             <motion.div
-              className="bg-white dark:bg-[#0f2b3b] rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl"
+                  className="bg-white dark:bg-[#0f2b3b] rounded-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl mx-4"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}

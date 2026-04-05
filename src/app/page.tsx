@@ -14,6 +14,7 @@ import PainPointSection from "./components/PainPointSection"
 import ServicesPreview from "./components/ServicesPreview"
 import IndustriesSection from "./components/IndustriesSection"
 import ProcessSteps from "./components/ProcessSteps"
+import SeoLandingGrid from "./components/SeoLandingGrid"
 import {
   BRAND_NAME,
   SITE_URL,
@@ -146,6 +147,7 @@ export default function Home() {
         <PainPointSection />
         <UspSection />
         <ServicesPreview />
+        <SeoLandingGrid />
         <KinemoShowcase />
         <IndustriesSection />
         <ProcessSteps />

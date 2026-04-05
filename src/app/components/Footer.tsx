@@ -4,6 +4,17 @@ import Link from "next/link"
 import { FaLinkedin, FaYoutube } from "react-icons/fa"
 import { motion } from "framer-motion"
 import React from "react"
+import {
+  COMPANY_ADDRESS_LINE_1,
+  COMPANY_BRAND,
+  COMPANY_CITY,
+  COMPANY_COUNTRY,
+  COMPANY_EMAIL,
+  COMPANY_EMAIL_HREF,
+  COMPANY_NAME,
+  COMPANY_PHONE,
+  COMPANY_PHONE_HREF,
+} from "@/lib/site"
 
 export default function Footer() {
   return (
@@ -18,13 +29,17 @@ export default function Footer() {
         {/* Logo + Text + Kontakt */}
         <div className="space-y-4">
           <h4 className="text-2xl font-extrabold tracking-tight">
-            KIN<span className="text-[#50C9E1]">EMO</span>
+            {COMPANY_BRAND.slice(0, 3).toUpperCase()}<span className="text-[#50C9E1]">{COMPANY_BRAND.slice(3).toUpperCase()}</span>
           </h4>
           <p className="text-sm leading-relaxed text-white/90">
             Industrielle CT und Röntgenanalyse für Unternehmen, die verborgene Fehler frühzeitig erkennen wollen.
           </p>
-          <p className="text-sm mt-4">📞 +49 1520 576 5010</p>
-          <p className="text-sm">📬 contact@kinemo.de</p>
+          <p className="text-sm mt-4">
+            📞 <a href={COMPANY_PHONE_HREF} className="hover:text-[#50C9E1] transition-colors">{COMPANY_PHONE}</a>
+          </p>
+          <p className="text-sm">
+            📬 <a href={COMPANY_EMAIL_HREF} className="hover:text-[#50C9E1] transition-colors">{COMPANY_EMAIL}</a>
+          </p>
           <div className="flex gap-3 mt-4">
             <a
               href="https://www.linkedin.com/company/kinemo"
@@ -49,10 +64,10 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-lg mb-4">Labor</h4>
           <p className="text-sm leading-relaxed">
-            Kinemo GmbH<br />
-            Talstraße 71<br />
-            42551 Velbert<br />
-            Deutschland
+            {COMPANY_NAME}<br />
+            {COMPANY_ADDRESS_LINE_1}<br />
+            {COMPANY_CITY}<br />
+            {COMPANY_COUNTRY}
           </p>
         </div>
 
@@ -75,6 +90,10 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold text-lg mb-4">Weiteres</h4>
           <ul className="space-y-2 text-sm">
+            <li><Link href="/ct-aluminiumguss">CT für Aluminiumguss</Link></li>
+            <li><Link href="/bga-loetstellenpruefung">BGA-Lötstellenprüfung</Link></li>
+            <li><Link href="/porositaetsanalyse">Porositätsanalyse</Link></li>
+            <li><Link href="/erstmusterpruefung-ct">Erstmusterprüfung mit CT</Link></li>
             <li><Link href="/impressum">Impressum</Link></li>
             <li><Link href="/datenschutz">Datenschutzerklärung</Link></li>
           </ul>
