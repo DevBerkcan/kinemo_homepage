@@ -7,16 +7,42 @@ export default function DemoRequestForm() {
   const [submitted, setSubmitted] = useState(false)
   const [privacy, setPrivacy] = useState(false)
   const [privacyError, setPrivacyError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [submitError, setSubmitError] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!privacy) {
       setPrivacyError(true)
       return
     }
     setPrivacyError(false)
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 4000)
+    setSubmitError("")
+
+    const form = e.target as HTMLFormElement
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      company: (form.elements.namedItem("company") as HTMLInputElement)?.value ?? "",
+      phone: (form.elements.namedItem("phone") as HTMLInputElement)?.value ?? "",
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement)?.value ?? "",
+      source: "demo",
+    }
+
+    setLoading(true)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error()
+      setSubmitted(true)
+    } catch {
+      setSubmitError("Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut.")
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -35,22 +61,26 @@ export default function DemoRequestForm() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
                 required
+                name="name"
                 type="text"
                 placeholder="Ihr Name"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-gray-800 dark:text-white placeholder-gray-400"
               />
               <input
                 required
+                name="email"
                 type="email"
                 placeholder="E-Mail-Adresse"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-gray-800 dark:text-white placeholder-gray-400"
               />
               <input
+                name="company"
                 type="text"
                 placeholder="Unternehmen"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-gray-800 dark:text-white placeholder-gray-400"
               />
               <input
+                name="phone"
                 type="tel"
                 placeholder="Telefonnummer (optional)"
                 className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-gray-800 dark:text-white placeholder-gray-400"
@@ -58,6 +88,7 @@ export default function DemoRequestForm() {
             </div>
 
             <textarea
+              name="message"
               rows={5}
               placeholder="Welches Bauteil soll geprüft werden? Was ist Ihre Fragestellung?"
               className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-[#1a3a4b] bg-white dark:bg-[#0f2b3b] text-gray-800 dark:text-white placeholder-gray-400"
@@ -80,12 +111,18 @@ export default function DemoRequestForm() {
             {privacyError && (
               <p className="text-red-500 text-sm -mt-3">Bitte bestätigen Sie die Datenschutzerklärung.</p>
             )}
+            {submitError && (
+              <p className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 px-4 py-3 rounded-lg">
+                {submitError}
+              </p>
+            )}
 
             <button
               type="submit"
-              className="w-full md:w-auto bg-[#FF6600] hover:bg-orange-500 text-white font-semibold px-6 py-3 rounded-full transition"
+              disabled={loading}
+              className="w-full md:w-auto bg-[#FF6600] hover:bg-orange-500 disabled:opacity-60 text-white font-semibold px-6 py-3 rounded-full transition"
             >
-              Jetzt Analyse anfragen
+              {loading ? "Wird gesendet..." : "Jetzt Analyse anfragen"}
             </button>
           </form>
         ) : (

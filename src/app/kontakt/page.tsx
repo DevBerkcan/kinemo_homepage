@@ -40,7 +40,7 @@ export default function KontaktPage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const validationErrors = validateForm()
     if (Object.keys(validationErrors).length > 0) {
@@ -49,11 +49,20 @@ export default function KontaktPage() {
     }
     setErrors({})
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, source: "kontakt" }),
+      })
+      if (!res.ok) throw new Error("Fehler beim Senden")
       setSuccess(true)
       setForm({ name: "", email: "", phone: "", company: "", message: "", privacy: false })
-    }, 1500)
+    } catch {
+      setErrors({ submit: "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail." })
+    } finally {
+      setLoading(false)
+    }
   }
 
   const breadcrumbSchema = createBreadcrumbJsonLd([
@@ -258,6 +267,12 @@ export default function KontaktPage() {
                   </label>
                 </div>
                 {errors.privacy && <p className="text-red-500 text-xs -mt-3">{errors.privacy}</p>}
+
+                {errors.submit && (
+                  <p className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 px-4 py-3 rounded-lg">
+                    {errors.submit}
+                  </p>
+                )}
 
                 <button
                   type="submit"
